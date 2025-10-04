@@ -5,6 +5,7 @@ import Record from "./Components/StudentsRecord/Record";
 
 import { BrowserRouter, Routes, Route, Outlet } from "react-router-dom";
 import Register from "./Components/Register/Register";
+import Indexdb from "./Components/Studentdb.js/Indexdb";
 
 // Layout with sidebar
 function DashboardLayout() {
@@ -30,6 +31,7 @@ function App() {
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/record" element={<Record />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/indexdb" element={<Indexdb />} />
         </Route>
       </Routes>
     </BrowserRouter>
