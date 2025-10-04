@@ -1,0 +1,52 @@
+{
+    "student": [
+        {
+            "fullName": "John Doe",
+            "registrationNumber": "REG2025-001",
+            "date": "2025-10-03",
+            "status": "present"
+        },
+        {
+            "fullName": "John Doe",
+            "registrationNumber": "REG2025-001",
+            "date": "2025-10-03",
+            "status": "present"
+        },
+        {
+            "fullName": "John Doe",
+            "registrationNumber": "REG2025-001",
+            "date": "2025-10-03",
+            "status": "present"
+        },
+        {
+            "fullName": "John Doe",
+            "registrationNumber": "REG2025-001",
+            "date": "2025-10-03",
+            "status": "present"
+        },
+        {
+            "fullName": "John Doe",
+            "registrationNumber": "REG2025-001",
+            "date": "2025-10-03",
+            "status": "present"
+        },
+        {
+            "fullName": "John Doe",
+            "registrationNumber": "REG2025-001",
+            "date": "2025-10-03",
+            "status": "present"
+        },
+        {
+            "fullName": "John Doe",
+            "registrationNumber": "REG2025-001",
+            "date": "2025-10-03",
+            "status": "present"
+        },
+        {
+            "fullName": "John Doe",
+            "registrationNumber": "REG2025-001",
+            "date": "2025-10-03",
+            "status": "present"
+        }
+    ]
+}
