@@ -2,10 +2,14 @@ import Dashboard from "./Components/Dashboard/Dashboard";
 import AdminLogin from "./Components/Login/AdminLogin";
 import Sidebar from "./Components/Sidebar/Sidebar";
 import Record from "./Components/StudentsRecord/Record";
+import AddCourse from "./Components/Register/AddCourse";
 
 import { BrowserRouter, Routes, Route, Outlet } from "react-router-dom";
-import Register from "./Components/Register/Register";
+import RegisterStudent from "./Components/Register/RegisterStudent";
+import RegisterAdmin from "./Components/Register/RegisterAdmin";
 import Indexdb from "./Components/Studentdb.js/Indexdb";
+import Sessions from "./Components/Register/Sessions";
+// import NotFound from "./Components/ErrorPage/NotFound";
 
 // Layout with sidebar
 function DashboardLayout() {
@@ -24,14 +28,18 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<AdminLogin />} />
+        <Route path="/adminLogin" element={<AdminLogin />} />
+        <Route path="/registerAdmin" element={<RegisterAdmin />} />
 
         {/* All pages with sidebar */}
         <Route element={<DashboardLayout />}>
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/record" element={<Record />} />
-          <Route path="/register" element={<Register />} />
+          <Route path="/registerStudent" element={<RegisterStudent />} />
+          <Route path="/addCourse" element={<AddCourse />} />
+          <Route path="/sessions" element={<Sessions />} />
           <Route path="/indexdb" element={<Indexdb />} />
+          {/* <Route path="*" element={<NotFound/>} /> */}
         </Route>
       </Routes>
     </BrowserRouter>

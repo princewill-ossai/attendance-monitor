@@ -6,17 +6,17 @@ const Indexdb = () => {
   const [search, setSearch] = useState("");
   const [dateFilter, setDateFilter] = useState("");
 
-  useEffect(() => {
-    // Fetch from public/Prototype.json
-    axios
-      .get("/Prototype.json")
-      .then((response) => {
-        setStudents(response.data.student); 
-      })
-      .catch((error) => {
-        console.error("Error fetching student data:", error);
-      });
-  }, []);
+  // useEffect(() => {
+  //   // Fetch from public/Prototype.json
+  //   axios
+  //     .get("/Prototype.json")
+  //     .then((response) => {
+  //       setStudents(response.data.student); 
+  //     })
+  //     .catch((error) => {
+  //       console.error("Error fetching student data:", error);
+  //     });
+  // }, []);
 
   const filteredStudents = students.filter((student) => {
     return (
@@ -25,6 +25,39 @@ const Indexdb = () => {
         student.registrationNumber.toLowerCase().includes(search.toLowerCase())) &&
       (dateFilter === "" || student.date === dateFilter)
     );
+  });
+
+  const log = (key, value) => {
+    console.log(key, value)
+  }
+
+  const get = async (endpoint, requestHeaders) => {
+    try {
+      const response = await axios.get("", {
+        withCredentials: false,
+        headers: requestHeaders
+      })
+      .then((response) => {
+        setStudents(response.data.student)
+      })
+      log(endpoint, response.data);
+
+      return response.data;
+    } catch (error) {
+      if (error.response && error.response.data) {
+        return error.response.data;
+      }
+
+      const errorObject = handleError(error.message);
+      log(`ERROR: ${endpoint}`, errorObject);
+
+      return errorObject;
+    }
+  };
+  const handleError = (error) => ({
+    data: null,
+    message: error,
+    status: '99'
   });
 
 

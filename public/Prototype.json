@@ -48,5 +48,58 @@
             "date": "2025-10-03",
             "status": "present"
         }
+    ],
+
+    "courses": [
+        {
+            "id": "1",
+            "name": "Mathematics",
+            "code": "mts101"
+        },
+        {
+            "id": "2",
+            "name": "English",
+            "code": "eng101"
+        },
+        {
+            "id": "3",
+            "name": "Civic Education",
+            "code": "cve101"
+        },
+        {
+            "id": "4",
+            "name": "Physics",
+            "code": "phs101"
+        },
+        {
+            "id": "5",
+            "name": "Chemistry",
+            "code": "chm101"
+        },
+        {
+            "id": "6",
+            "name": "Economics",
+            "code": "ecs101"
+        },
+        {
+            "id": "7",
+            "name": "Goegraphy",
+            "code": "gpy101"
+        },
+        {
+            "id": "8",
+            "name": "Litrature",
+            "code": "lit101"
+        },
+        {
+            "id": "9",
+            "name": "Social Studies",
+            "code": "scs101"
+        },
+        {
+            "id": "10",
+            "name": "Chridtian Religious Knowlege",
+            "code": "crs101"
+        }
     ]
 }

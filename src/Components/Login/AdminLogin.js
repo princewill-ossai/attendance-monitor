@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const AdminLogin = () => {
   const [email, setEmail] = useState("");
@@ -90,9 +90,11 @@ const AdminLogin = () => {
           </button>
         </form>
         <p className="text-center text-sm mt-4">
-          <a href="../register/index.html" className="text-blue-500 hover:underline">
-            Register a Student
-          </a>
+          <Link to='/registerAdmin'>
+            <span className="text-blue-500 hover:underline">
+              Register admin
+            </span>
+          </Link>
         </p>
       </div>
     </div>

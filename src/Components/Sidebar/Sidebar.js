@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
-import faceImg from "../../asset/faceIcon.jpeg"
 
 const Sidebar = () => {
   const [isOpen, setIsOpen] = useState(false)
@@ -24,7 +23,7 @@ const Sidebar = () => {
       >
         <div className="px-6 py-5 border-b border-[rgba(255,255,255,0.03)]">
           <div className="flex items-center gap-3">
-            <div className="bg-slate-800 w-9 h-9 rounded-md flex items-center justify-center text-2xl">✔️</div>
+            
             <div className="text-lg font-semibold">Smart Attendance</div>
           </div>
         </div>

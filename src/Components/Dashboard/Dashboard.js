@@ -1,99 +1,87 @@
-import React from 'react'
+import React, { useCallback } from 'react'
+import { Link } from 'react-router-dom'
+import Course from '../Courses/Course'
+import { useState, useEffect } from 'react'
+import Loader from '../Loader/Loader'
+import CourseList from '../Courses/CourseList'
+import EmptyFolder from '../EmptyFolder/Index'
+import PaginationUtil from '../Pagination/Index'
+import log from "../Utilities/LoggingUtils"
+import axios from 'axios'
+import { get, getJsonHeader } from '../Utilities/HttpClientUtil'
+import { getCoursesPagedUrl } from '../Utilities/Endpoints'
+
 
 const Dashboard = () => {
+  const [render, setRender] = useState({
+    loader: true,
+    table: false,
+    emptyFolder: false
+  });
+  const [courses, setCourses] = useState([]);
+  const [pageRequest, setPageRequest] = useState({ page: 1, size: 10 });
+  const [totalPages, setTotalPages] = useState(0);
+
+  const fetchCourses = useCallback(async (page, size) => {
+    setRender({
+      loader: true,
+      table: false,
+      emptyFolder: false
+    })
+
+    const response = await get(`${getCoursesPagedUrl}?page=${page}&size=${size}`, getJsonHeader())
+
+    if (response.code === '00' && response.data.content.length !== 0) {
+      setRender({
+        loader: false,
+        table: true,
+        emptyFolder: false
+      })
+
+      setCourses(response.data.content)
+      setTotalPages(response.data.totalElements)
+    } else {
+      setRender({
+        loader: false,
+        table: false,
+        emptyFolder: true
+      });
+    }
+  }, [])
+
+  useEffect(() => {
+    fetchCourses(pageRequest.page, pageRequest.size)
+  }, [pageRequest.page, pageRequest.size, fetchCourses])
+
+
+
   return (
     <div className='w-full'>
       <div className="bg-[#020221] text-white font-sans flex flex-col md:flex-row">
-  <div id="sidebar-root" className=""></div>
 
-  <div className="flex-1 min-h-screen flex flex-col">
-    
-    <header className="flex flex-wrap items-center justify-between gap-4 p-6">
-      <h1 className="text-xl font-semibold">✅ Smart Attendance</h1>
-      <div className="flex items-center space-x-6">
-        <div>
-          <p id="currentDate" className="text-gray-400 text-sm"></p>
-          <p id="currentTime" className="text-lg font-bold"></p>
-        </div>
-        <div className="w-10 h-10 rounded-full bg-gray-700 flex items-center justify-center">
-          <span className="material-icons">person</span>
+        <div className="flex-1 min-h-screen pt-6 flex flex-col">
+          <section className="px-6">
+            <h2 className="text-2xl font-bold mb-6">Dashboard</h2>
+
+            {
+              [
+                <Loader shouldDisplay={render.loader} />,
+                <CourseList shouldDisplay={render.table} courses={courses} />,
+                <EmptyFolder shouldDisplay={render.emptyFolder} />,
+                // <PaginationUtil
+                //   setPageRequestFxn={setPageRequest}
+                //   fetchItemsFxn={fetchProjects}
+                //   totalPages={totalPages}
+                //   pageRequest={pageRequest}
+                //   render={setRender}
+                // />
+              ]
+            }
+
+
+          </section>
         </div>
       </div>
-    </header>
-
-    <section className="px-6">
-      <h2 className="text-2xl font-bold mb-6">Dashboard</h2>
-
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
-        <div className="bg-[#0707418c] p-6 rounded-xl shadow-md">
-          <p className="text-3xl font-bold" id="totalStudents">250</p>
-          <p className="text-gray-400">Students</p>
-        </div>
-        <div className="bg-[#0707418c] p-6 rounded-xl shadow-md">
-          <p className="text-3xl font-bold text-green-400" id="presentToday">197</p>
-          <p className="text-gray-400">Present Today</p>
-        </div>
-        <div className="bg-[#0707418c] p-6 rounded-xl shadow-md">
-          <p className="text-3xl font-bold text-blue-400" id="attendancePercent">78.8%</p>
-          <p className="text-gray-400">Attendance</p>
-        </div>
-        <div className="bg-[#0707418c] p-6 rounded-xl shadow-md">
-          <p className="text-3xl font-bold text-purple-400" id="classNameesToday">5</p>
-          <p className="text-gray-400">classes Today</p>
-        </div>
-      </div>
-
-      <div className="bg-[#0707418c] p-6 rounded-xl shadow-md mb-10 overflow-x-auto">
-        <h3 className="text-lg font-semibold mb-4">Attendance</h3>
-        <canvas id="attendanceChart" height="100"></canvas>
-      </div>
-      <div className="bg-[#0707418c] p-6 rounded-xl shadow-md">
-        <h3 className="text-lg font-semibold mb-4">Quick Links</h3>
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-          <a href="newSession.html" className="block bg-blue-600 hover:bg-blue-700 text-center py-2 rounded-lg">Start Session</a>
-          <a href="records.html" className="block bg-green-600 hover:bg-green-700 text-center py-2 rounded-lg">View Records</a>
-          <a href="../register/index.html" className="block bg-purple-600 hover:bg-purple-700 text-center py-2 rounded-lg">Add Student</a>
-        </div>
-      </div>
-    </section>
-
-    {/* <script>
-      function updateDateTime() {
-        const now = new Date();
-        document.getElementById("currentDate").textContent = now.toLocaleDateString("en-US", {
-          weekday: "short", year: "numeric", month: "short", day: "numeric"
-        });
-        document.getElementById("currentTime").textContent = now.toLocaleTimeString();
-      }
-      setInterval(updateDateTime, 1000);
-      updateDateTime();
-
-      // Chart.js Attendance Graph
-      const ctx = document.getElementById('attendanceChart').getContext('2d');
-      new Chart(ctx, {
-        type: 'line',
-        data: {
-          labels: ['20 Apr', '21 Apr', '22 Apr', '23 Apr', '24 Apr', '25 Apr', '26 Apr'],
-          datasets: [{
-            label: 'Attendance %',
-            data: [10, 40, 60, 45, 30, 35, 20],
-            borderColor: 'rgb(59,130,246)',
-            fill: false,
-            tension: 0.4
-          }]
-        },
-        options: {
-          responsive: true,
-          plugins: { legend: { display: false } },
-          scales: {
-            y: { beginAtZero: true, max: 100 }
-          }
-        }
-      });
-    </script> */}
-  </div>
-  <script src="../sidebar/sidebar.js"></script>
-</div>
     </div>
   )
 }

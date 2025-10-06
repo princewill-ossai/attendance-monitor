@@ -1,0 +1,24 @@
+.empty-folder {
+    width: 30px;
+    height: 30px;
+    color: #b5b3b3;
+}
+
+.empty-vh {
+    height: 67vh;
+}
+
+.midi-empty-vh {
+    height: fit-content;
+}
+
+.search-repo-info {
+    color: #b5b3b3;
+    padding: 8.6px;
+}
+
+/* Loader styles */
+
+.loader-vh {
+    height: 70vh;
+}
