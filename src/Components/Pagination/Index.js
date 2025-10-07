@@ -55,9 +55,9 @@ const PaginationUtil = ({ pageRequest, setPageRequestFxn, fetchItemsFxn, totalPa
     }
 
     return (
-        <div className="smooth-fade-in">
+        <div>
             <div className="pg-border" />
-            <div className="row py-1">
+            <div className="flex justify-between items-center py-1">
                 <div className="col-md-3">
                     {`Page ${pageRequest.page} of ${totalPages}`}
                 </div>
@@ -74,7 +74,7 @@ const PaginationUtil = ({ pageRequest, setPageRequestFxn, fetchItemsFxn, totalPa
                         containerClassName={'pagination d-flex justify-content-center align-items-center'}
                     />
                 </div>
-                <div className="row col-md-4 justify-content-end px-0 mx-0">
+                <div className="flex gap-4 col-md-4 justify-content-end px-0 mx-0">
                     <div className="col-md-5">
                         <select
                             onChange={handleSizeChange}

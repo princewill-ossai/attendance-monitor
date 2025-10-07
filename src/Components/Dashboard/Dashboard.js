@@ -68,13 +68,13 @@ const Dashboard = () => {
                 <Loader shouldDisplay={render.loader} />,
                 <CourseList shouldDisplay={render.table} courses={courses} />,
                 <EmptyFolder shouldDisplay={render.emptyFolder} />,
-                // <PaginationUtil
-                //   setPageRequestFxn={setPageRequest}
-                //   fetchItemsFxn={fetchProjects}
-                //   totalPages={totalPages}
-                //   pageRequest={pageRequest}
-                //   render={setRender}
-                // />
+                <PaginationUtil
+                  setPageRequestFxn={setPageRequest}
+                  fetchItemsFxn={fetchCourses}
+                  totalPages={totalPages}
+                  pageRequest={pageRequest}
+                  render={setRender}
+                />
               ]
             }
 

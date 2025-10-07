@@ -35,7 +35,7 @@ const Sidebar = () => {
           </p>
           <div className="side-link flex gap-4 items-center flex-col py-3 rounded-lg mx-7">
             <i className="fa-solid text-[2.5rem] fa-clipboard-list"></i>
-            <Link to='/register'><p>Add new student</p></Link>
+            <Link to='/registerStudent'><p>Add New Student</p></Link>
           </div>
           <div className="side-link flex gap-4 items-center flex-col py-3 rounded-lg mx-7">
             <i className="fa-solid text-[2.5rem] fa-database"></i>

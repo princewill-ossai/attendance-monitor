@@ -12,13 +12,15 @@
 }
 
 .pagination li.active {
-    background-color: #007bff;
-    color: white;
+    background-color: white;
+    color: black;
+    /* background-color: #007bff;
+    color: white; */
 }
 
 .pagination li:hover {
-    background-color: #007bff;
-    color: white !important;
+    background-color: white;
+    color: black !important;
     border: 1px solid #007bff;
 }
 
