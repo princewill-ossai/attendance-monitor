@@ -5,7 +5,7 @@ import success_tick from "../../Assets/good_tick_1.png";
 import bad_tick from "../../Assets/bad_tick.png";
 import { useContext, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import { get, post } from "../Utilities/HttpClientUtil";
+import { get, getFormDataHeader, getJsonHeader, post } from "../Utilities/HttpClientUtil";
 
 /*
     This modal should be reusable
@@ -25,16 +25,12 @@ const ConfirmationModal = ({ data, dataStateFunction }) => {
             parent: true
         }));
 
-        const headers = {
-            'Content-Type': 'application/json'
-        };
-
         let response;
 
         if (data.method === 'POST') {
-            response = await post(data.endpoint, data.request, headers);
+            response = await post(data.endpoint, data.request, getJsonHeader());
         } else if (data.method === 'POST_FORM_DATA') {
-            response = await get(data.endpoint, headers);
+            response = await post(data.endpoint, data.request, getFormDataHeader());
         } else {
 
         }

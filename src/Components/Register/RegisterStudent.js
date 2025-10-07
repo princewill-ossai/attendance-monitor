@@ -64,8 +64,9 @@ const Register = () => {
 
     if (multiple) {
       const selectedValues = Array.from(options)
-        .filter((opt) => opt.selected)
-        .map((opt) => opt.id);
+        .filter(opt => opt.selected)
+        .map(opt => parseInt(opt.value));
+        console.log(selectedValues)
 
       setUserData((prev) => ({
         ...prev,
@@ -84,56 +85,8 @@ const Register = () => {
     fetchCategories();
   }, [fetchCategories, fetchCourses]);
 
-  // const  = async (e) => {
-  //   e.preventDefault();
-
-  //   try {
-  //     const form = new FormData();
-  //     form.append("regNo", formData.regNo.trim());
-  //     form.append("firstName", formData.firstName.trim());
-  //     form.append("lastName", formData.lastName.trim());
-  //     form.append("courses", formData.courses.trim());
-  //     form.append("dept", formData.dept.trim());
-  //     form.append("studentEmail", formData.studentEmail.trim());
-  //     form.append("date", new Date().toLocaleDateString());
-  //     form.append("status", "Registered");
-
-  //     form.append("category", formData.category.toUpperCase());
-
-  //     const courseList = formData.courses
-  //       .split(',')
-  //       .map((c) => c.trim())
-  //       .filter((c) => c !== "");
-
-  //     courseList.forEach((course) => form.append("courses", JSON.stringify(courseList)))
-
-  //     if (formData.facialImage) {
-  //       form.append("facialImage", formData.facialImage);
-  //     }
-
-  //     const response = await axios.post(studentRegistrationPostUrl, form
-  //       //   , {
-  //       //   headers: { "Content-Type": "multipart/form-data" },
-  //       // }
-  //     );
-
-  //     alert("Student registered successfully!");
-  //     console.log("Server response:", response.data);
-
-  //     // redirect
-  //     navigate("");
-  //   } catch (error) {
-  //     console.error("Error registering student:", error);
-  //     if (error.response) {
-  //       console.error("Response data:", error.response.data);
-  //     }
-  //     alert("Failed to register student. Please try again.");
-  //   }
-  // };
-
   const handleOnSubmit = (event) => {
     event.preventDefault();
-    console.log('THDBDBB')
 
     const request = new FormData();
     request.append("regNo", userData.regNo.trim());
@@ -164,7 +117,7 @@ const Register = () => {
         <form onSubmit={handleOnSubmit}>
           <label className="block mb-2 font-medium">First Name</label>
           <input
-            name="firstName"
+            name="firstname"
             type="text"
             onChange={handleChange}
             className="w-full border dark:bg-transparent dark:border-gray-900 rounded px-3 py-2 mb-4"
@@ -173,7 +126,7 @@ const Register = () => {
 
           <label className="block mb-2 font-medium">Last Name</label>
           <input
-            name="lastName"
+            name="lastname"
             type="text"
             onChange={handleChange}
             className="w-full border dark:bg-transparent dark:border-gray-900 rounded px-3 py-2 mb-4"
@@ -187,6 +140,8 @@ const Register = () => {
             onChange={handleChange}
             className="w-full border dark:bg-transparent dark:border-gray-900 rounded px-3 py-2 mb-4"
             required
+            pattern="^[A-Z0-9]{12}$"
+            title="Must be exactly 12 uppercase alphanumeric characters"
           />
 
           <label className="block mb-2 font-medium">Email</label>
@@ -206,6 +161,7 @@ const Register = () => {
             className="w-full border dark:bg-transparent dark:border-gray-900 rounded px-3 py-2 mb-4"
             required
           >
+            <option value="" selected disabled>--select category--</option>
             {
               categories.map(category => (
                 <option value={category}>{toSentenceCase(category)}</option>
@@ -215,7 +171,7 @@ const Register = () => {
 
           <label className="block mb-2 font-medium">Department</label>
           <input
-            name="department"
+            name="dept"
             type="text"
             onChange={handleChange}
             className="w-full dark:bg-transparent border dark:border-gray-900 rounded px-3 py-2 mb-4"
@@ -230,7 +186,7 @@ const Register = () => {
             onChange={handleChange}
             className="w-full border dark:bg-transparent dark:border-gray-900 rounded px-3 py-2 mb-4"
           >
-
+            <option value="" selected disabled>--select course(s)--</option>
             {
               courses.map(course => (
                 <option value={course.id}>{`${course.code} - ${course.name}`}</option>

@@ -22,6 +22,12 @@ export const getJsonHeader = () => {
     }
 };
 
+export const getFormDataHeader = () => {
+    return {
+        'Content-Type': 'multipart/form-data',
+    }
+};
+
 
 
 // export const get = async (endpoint, requestHeaders) => {
@@ -64,6 +70,28 @@ export const post = async (endpoint, requestBody, requestHeaders) => {
         return errorObject;
     }
 };
+
+// export const postFormData = async (endpoint, requestBody = {}) => {
+//     try {
+//         const response = await axios.post(endpoint, requestBody, {
+//             headers: {
+//                 "Content-Type": "multipart/form-data",
+//             },
+//         });
+
+//         log(endpoint, response.data);
+//         return response.data;
+//     } catch (error) {
+//         if (error.response && error.response.data) {
+//             log(`ERROR: ${endpoint}`, error.response.data);
+//             return error.response.data;
+//         }
+
+//         const errorObject = handleError(error.message);
+//         log(`ERROR: ${endpoint}`, errorObject);
+//         return errorObject;
+//     }
+// };
 
 
 export const get = async (endpoint, requestHeaders) => {
