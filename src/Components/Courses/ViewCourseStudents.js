@@ -75,27 +75,6 @@ const ViewCourseStudents = () => {
             <div>
               <h1 className="text-2xl font-semibold">{course.name} Students</h1>
             </div>
-
-            <div className="flex flex-wrap items-center gap-3 w-full md:w-auto">
-              <input
-                type="date"
-                value={dateFilter}
-                onChange={(e) => setDateFilter(e.target.value)}
-                className="bg-[#0f1b28] text-sm px-3 py-2 rounded-md border border-[rgba(255,255,255,0.03)] w-full sm:w-auto"
-              />
-
-              <input
-                type="text"
-                placeholder="Search by name or ID"
-                value={search}
-                onChange={(e) => setSearch(e.target.value)}
-                className="bg-[#0f1b28] text-sm px-3 py-2 rounded-md border border-[rgba(255,255,255,0.03)] w-full sm:w-64"
-              />
-
-              <div className="w-10 h-10 rounded-full bg-[#0f1724] flex items-center justify-center">
-                👤
-              </div>
-            </div>
           </header>
 
     <div className='w-full'>
@@ -103,7 +82,6 @@ const ViewCourseStudents = () => {
 
         <div className="flex-1 min-h-screen pt-6 flex flex-col">
           <section className="px-6">
-            <h2 className="text-2xl font-bold mb-6">Courses</h2>
 
             {
               [

@@ -1,7 +1,8 @@
 import React from 'react'
 
-const StudentCourseList = ({students}) => {
+const StudentCourseList = ({students, shouldDisplay}) => {
   return (
+    shouldDisplay &&
     <div>
        <section className="bg-[rgba(255,255,255,0.02)] p-4 sm:p-6 rounded-2xl shadow-lg">
             <div className="overflow-x-auto">

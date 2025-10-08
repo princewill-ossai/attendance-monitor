@@ -12,6 +12,7 @@ import Sessions from "./Components/Register/Sessions";
 import CourseView from "./Components/Courses/CourseView";
 import NewSession from "./Components/Courses/NewSession";
 import ViewCourseStudents from "./Components/Courses/ViewCourseStudents";
+import MarkAttendance from "./Components/Courses/MarkAttendance";
 // import NotFound from "./Components/ErrorPage/NotFound";
 
 // Layout with sidebar
@@ -45,6 +46,7 @@ function App() {
           <Route path="/indexdb" element={<Indexdb />} />
           <Route path="/newSession" element={<NewSession />} />
           <Route path="/course/students" element={<ViewCourseStudents />} />
+          <Route path="/mark-attendance/:id" element={<MarkAttendance />} />
           {/* <Route path="*" element={<NotFound/>} /> */}
         </Route>
       </Routes>
