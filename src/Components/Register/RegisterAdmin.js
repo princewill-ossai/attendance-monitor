@@ -163,11 +163,6 @@ const RegisterAdmin = () => {
                 </p>
             </div>
 
-
-
-
-
-
             <ConfirmationModal
                 data={confirmationDialog}
                 dataStateFunction={setConfirmationDialog}

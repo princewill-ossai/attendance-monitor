@@ -27,48 +27,12 @@ const Indexdb = () => {
     );
   });
 
-  const log = (key, value) => {
-    console.log(key, value)
-  }
-
-  const get = async (endpoint, requestHeaders) => {
-    try {
-      const response = await axios.get("", {
-        withCredentials: false,
-        headers: requestHeaders
-      })
-      .then((response) => {
-        setStudents(response.data.student)
-      })
-      log(endpoint, response.data);
-
-      return response.data;
-    } catch (error) {
-      if (error.response && error.response.data) {
-        return error.response.data;
-      }
-
-      const errorObject = handleError(error.message);
-      log(`ERROR: ${endpoint}`, errorObject);
-
-      return errorObject;
-    }
-  };
-  const handleError = (error) => ({
-    data: null,
-    message: error,
-    status: '99'
-  });
-
-
-
   return (
     <div className="bg-[#020221] w-full text-gray-100 min-h-screen">
       <div className="flex flex-col md:flex-row h-screen">
         <div id="sidebar-root"></div>
 
         <main className="flex-1 p-4 sm:p-6 md:p-8 overflow">
-          {/* ✅ Header with title + controls */}
           <header className="flex flex-wrap items-center justify-between gap-4 mb-6">
             <div>
               <h1 className="text-2xl font-semibold">Attendance Records</h1>
@@ -98,8 +62,6 @@ const Indexdb = () => {
               </div>
             </div>
           </header>
-
-          {/* ✅ Table section */}
           <section className="bg-[rgba(255,255,255,0.02)] p-4 sm:p-6 rounded-2xl shadow-lg">
             <div className="overflow-x-auto">
               <table className="w-full min-w-[600px] text-left">

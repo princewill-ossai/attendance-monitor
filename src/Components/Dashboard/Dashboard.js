@@ -5,7 +5,7 @@ import CourseList from '../Courses/CourseList'
 import EmptyFolder from '../EmptyFolder/Index'
 import PaginationUtil from '../Pagination/Index'
 import { get, getJsonHeader } from '../Utilities/HttpClientUtil'
-import { getCoursesPagedUrl } from '../Utilities/Endpoints'
+import { coursesUrl } from '../Utilities/Endpoints'
 
 
 const Dashboard = () => {
@@ -25,7 +25,7 @@ const Dashboard = () => {
       emptyFolder: false
     })
 
-    const response = await get(`${getCoursesPagedUrl}?page=${page}&size=${size}`, getJsonHeader())
+    const response = await get(`${coursesUrl}?page=${page}&size=${size}`, getJsonHeader())
 
     if (response.code === '00' && response.data.content.length !== 0) {
       setRender({

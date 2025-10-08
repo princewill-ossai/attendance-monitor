@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 import { get, getJsonHeader } from "../Utilities/HttpClientUtil";
-import { getCourseList, getLecturersList, postSessionUrl } from "../Utilities/Endpoints";
+import { getCourseList, getLecturersList, postSessionUrl, sessionUrl } from "../Utilities/Endpoints";
 import { toSentenceCase } from "../Utilities/StringUtils";
 import ConfirmationModal from "../Modal/ConfirmationModal";
 
@@ -55,7 +55,7 @@ const NewSession = () => {
       parent: false,
       error: false,
       request: null,
-      endpoint: `${postSessionUrl}`,
+      endpoint: `${sessionUrl}`,
       method: "POST",
       landingPage: "/dashboard",
     });

@@ -1,65 +1,68 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import axios from "axios";
+import { coursesUrl, getLecturersList } from "../Utilities/Endpoints";
+import { get, getJsonHeader } from "../Utilities/HttpClientUtil";
+import { useLocation } from "react-router-dom";
+import Loader from "../Loader/Loader";
+import EmptyFolder from "../EmptyFolder/Index";
+import PaginationUtil from "../Pagination/Index";
+import StudentCourseList from "./StudentCourseList";
 
 const ViewCourseStudents = () => {
-  const [students, setStudents] = useState([]);
+  const location = useLocation()
+  const { course } = location.state || {}
+  const [students, setStudents] = useState([{
+        id: null,
+        firstname: "",
+        lastname: "",
+        regNo: "",
+        dept: "",
+        email: "",
+        category: "",
+        faceMatchPath: ""
+      }
+  ]);
+
   const [search, setSearch] = useState("");
   const [dateFilter, setDateFilter] = useState("");
+    const [render, setRender] = useState({
+      loader: true,
+      table: false,
+      emptyFolder: false
+    });
+    const [pageRequest, setPageRequest] = useState({ page: 1, size: 10 });
+    const [totalPages, setTotalPages] = useState(0);
 
-  // useEffect(() => {
-  //   // Fetch from public/Prototype.json
-  //   axios
-  //     .get("/Prototype.json")
-  //     .then((response) => {
-  //       setStudents(response.data.student); 
-  //     })
-  //     .catch((error) => {
-  //       console.error("Error fetching student data:", error);
-  //     });
-  // }, []);
+      const fetchStudents = useCallback(async (page, size) => {
+        setRender({
+          loader: true,
+          table: false,
+          emptyFolder: false
+        })
+    
+        const response = await get(`${coursesUrl}/${course.id}/students?page=${page}&size=${size}`, getJsonHeader())
+    
+        if (response.code === '00' && response.data.content.length !== 0) {
+          setRender({
+            loader: false,
+            table: true,
+            emptyFolder: false
+          })
+    
+          setStudents(response.data.content)
+          setTotalPages(response.data.totalElements)
+        } else {
+          setRender({
+            loader: false,
+            table: false,
+            emptyFolder: true
+          });
+        }
+      }, [course.id])
 
-  const filteredStudents = students.filter((student) => {
-    return (
-      (search === "" ||
-        student.fullName.toLowerCase().includes(search.toLowerCase()) ||
-        student.registrationNumber.toLowerCase().includes(search.toLowerCase())) &&
-      (dateFilter === "" || student.date === dateFilter)
-    );
-  });
-
-  const log = (key, value) => {
-    console.log(key, value)
-  }
-
-  const get = async (endpoint, requestHeaders) => {
-    try {
-      const response = await axios.get("", {
-        withCredentials: false,
-        headers: requestHeaders
-      })
-      .then((response) => {
-        setStudents(response.data.student)
-      })
-      log(endpoint, response.data);
-
-      return response.data;
-    } catch (error) {
-      if (error.response && error.response.data) {
-        return error.response.data;
-      }
-
-      const errorObject = handleError(error.message);
-      log(`ERROR: ${endpoint}`, errorObject);
-
-      return errorObject;
-    }
-  };
-  const handleError = (error) => ({
-    data: null,
-    message: error,
-    status: '99'
-  });
-
+      useEffect(() => {
+        fetchStudents(pageRequest.page, pageRequest.size)
+      }, [pageRequest.page, pageRequest.size, fetchStudents])
 
 
   return (
@@ -70,10 +73,7 @@ const ViewCourseStudents = () => {
         <main className="flex-1 p-4 sm:p-6 md:p-8 overflow">
           <header className="flex flex-wrap items-center justify-between gap-4 mb-6">
             <div>
-              <h1 className="text-2xl font-semibold">Course Attendance</h1>
-              <p className="text-sm text-gray-400 mt-1">
-                Review and export attendance history
-              </p>
+              <h1 className="text-2xl font-semibold">{course.name} Students</h1>
             </div>
 
             <div className="flex flex-wrap items-center gap-3 w-full md:w-auto">
@@ -98,48 +98,33 @@ const ViewCourseStudents = () => {
             </div>
           </header>
 
-          {/* ✅ Table section */}
-          <section className="bg-[rgba(255,255,255,0.02)] p-4 sm:p-6 rounded-2xl shadow-lg">
-            <div className="overflow-x-auto">
-              <table className="w-full min-w-[600px] text-left">
-                <thead>
-                  <tr className="text-gray-300 text-sm">
-                    <th className="px-4 sm:px-6 py-3 w-2/5">Student Name</th>
-                    <th className="px-4 sm:px-6 py-3 w-1/5">
-                      Registration Number
-                    </th>
-                    <th className="px-4 sm:px-6 py-3 w-1/5">Date</th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-[rgba(255,255,255,0.03)]">
-                  {filteredStudents.length > 0 ? (
-                    filteredStudents.map((student, index) => (
-                      <tr key={index} className="">
-                        <td className="border border-gray-800 px-4 py-2">
-                          {student.fullName}
-                        </td>
-                        <td className="border border-gray-800 px-4 py-2">
-                          {student.registrationNumber}
-                        </td>
-                        <td className="border border-gray-800 px-4 py-2">
-                          {student.date}
-                        </td>
-                      </tr>
-                    ))
-                  ) : (
-                    <tr>
-                      <td
-                        colSpan="4"
-                        className="text-center py-4 text-gray-500"
-                      >
-                        No students found
-                      </td>
-                    </tr>
-                  )}
-                </tbody>
-              </table>
-            </div>
+    <div className='w-full'>
+      <div className="bg-[#020221] text-white font-sans flex flex-col md:flex-row">
+
+        <div className="flex-1 min-h-screen pt-6 flex flex-col">
+          <section className="px-6">
+            <h2 className="text-2xl font-bold mb-6">Courses</h2>
+
+            {
+              [
+                <Loader shouldDisplay={render.loader} />,
+                <StudentCourseList shouldDisplay={render.table} students={students} />,
+                <EmptyFolder shouldDisplay={render.emptyFolder} />,
+                <PaginationUtil
+                  setPageRequestFxn={setPageRequest}
+                  fetchItemsFxn={fetchStudents}
+                  totalPages={totalPages}
+                  pageRequest={pageRequest}
+                  render={setRender}
+                />
+              ]
+            }
+
+
           </section>
+        </div>
+      </div>
+    </div>
         </main>
       </div>
     </div>

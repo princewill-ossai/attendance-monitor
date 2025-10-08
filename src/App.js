@@ -44,7 +44,7 @@ function App() {
           <Route path="/sessions" element={<Sessions />} />
           <Route path="/indexdb" element={<Indexdb />} />
           <Route path="/newSession" element={<NewSession />} />
-          <Route path="/courseStudent" element={<ViewCourseStudents />} />
+          <Route path="/course/students" element={<ViewCourseStudents />} />
           {/* <Route path="*" element={<NotFound/>} /> */}
         </Route>
       </Routes>
