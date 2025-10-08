@@ -55,7 +55,7 @@ const PaginationUtil = ({ pageRequest, setPageRequestFxn, fetchItemsFxn, totalPa
     }
 
     return (
-        <div>
+        <div className="mt-[19rem]">
             <div className="pg-border" />
             <div className="flex justify-between items-center py-1">
                 <div className="col-md-3">

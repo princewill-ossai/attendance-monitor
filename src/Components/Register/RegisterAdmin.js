@@ -1,138 +1,177 @@
-import React, { useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { registerLecturerUrl } from "../Utilities/Endpoints";
+import { get, getJsonHeader } from "../Utilities/HttpClientUtil";
+import ConfirmationModal from "../Modal/ConfirmationModal";
 
 const RegisterAdmin = () => {
-    const navigate = useNavigate()
 
-    const [formData, setFormData] = useState({
-        firstName: "",
-        lastName: "",
-        adminEmail: "",
-        department: "",
+    const [userData, setUserData] = useState({
+        firstname: "",
+        lastname: "",
+        dept: "",
         category: "",
-        photo: null,
+        email: "",
+        facialImage: null,
     });
 
-    const handleChange = (e) => {
-        const { name, value, files } = e.target;
-        setFormData((prev) => ({
-            ...prev,
-            [name]: files ? files[0] : value,
-        }));
-    };
+    const [confirmationDialog, setConfirmationDialog] = useState({
+        showDialog: false,
+        processing: false,
+        successful: false,
+        parent: false,
+        error: false,
+        request: null,
+        endpoint: `${registerLecturerUrl}`,
+        method: "POST_FORM_DATA",
+        landingPage: "/dashboard"
+    });
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
+    const handleChange = (event) => {
+        const { name, value, files, multiple, options } = event.target;
 
-        try {
-            const form = new FormData();
-            form.append("firstName", formData.firstName.trim());
-            form.append("lastName", formData.lastName.trim());
-            form.append("adminEmail", formData.adminEmail.trim());
-            form.append("department", formData.department.trim());
-            form.append("category", formData.category.trim());
-            form.append("date", new Date().toLocaleDateString());
-            form.append("status", "Registered");
+        if (multiple) {
+            const selectedValues = Array.from(options)
+                .filter(opt => opt.selected)
+                .map(opt => parseInt(opt.value));
 
-            if (formData.photo) {
-                form.append("photo", formData.photo);
-            }
-
-            const response = await axios.post("backend endpoinr url", form, {
-                headers: { "Content-Type": "multipart/form-data" },
-            });
-
-            alert("Student registered successfully!");
-            console.log("Server response:", response.data);
-
-            // redirect
-            navigate("../attebdance-record/attendanceResord.html");
-        } catch (error) {
-            console.error("Error registering student:", error);
-            alert("Failed to register student. Please try again.");
+            setUserData((prev) => ({
+                ...prev,
+                [name]: selectedValues,
+            }));
+        } else {
+            setUserData((prev) => ({
+                ...prev,
+                [name]: files ? files[0] : value,
+            }));
         }
     };
 
+    const handleOnSubmit = (event) => {
+        event.preventDefault();
+
+        const request = new FormData();
+        request.append("firstname", userData.firstname.trim());
+        request.append("lastname", userData.lastname.trim());
+        request.append("dept", userData.dept.trim());
+        request.append("email", userData.email.trim());
+        request.append("category", userData.category);
+        request.append("facialImage", userData.facialImage);
+
+        setConfirmationDialog(prev => ({
+            ...prev,
+            showDialog: true,
+            parent: true,
+            request: request
+        }));
+    }
+
     return (
-        <div className="bg-gray-100 dark:bg-[#020217] flex items-center font-bold justify-center h-screen">
+        <div className="overflow-y bg-gray-100 dark:bg-[#020217] flex items-center font-bold justify-center h-screen">
             <div className="bg-white relative dark:bg-[#020221] text-gray-200 shadow-lg rounded-lg p-8 w-full max-w-md">
                 <button className="bg-gray-800 absolute right-5 px-4 py-2 rounded-lg">
-                    &lAarr; Dashboard
+                    &lArr; Dashboard
                 </button>
-                <h1 className="text-2xl pt-16 font-bold mb-6">Add new admin</h1>
+                <h1 className="text-2xl pt-16 font-bold mb-6">Add New Admin</h1>
 
-                <form onSubmit={handleSubmit}>
-
+                <form onSubmit={handleOnSubmit}>
                     <label className="block mb-2 font-medium">First Name</label>
                     <input
-                        name="firstName"
-                        value={formData.firstName}
-                        onChange={handleChange}
+                        name="firstname"
                         type="text"
+                        onChange={handleChange}
                         className="w-full border dark:bg-transparent dark:border-gray-900 rounded px-3 py-2 mb-4"
                         required
                     />
 
                     <label className="block mb-2 font-medium">Last Name</label>
                     <input
-                        name="lastName"
-                        value={formData.lastName}
-                        onChange={handleChange}
+                        name="lastname"
                         type="text"
+                        onChange={handleChange}
                         className="w-full border dark:bg-transparent dark:border-gray-900 rounded px-3 py-2 mb-4"
-                        required
-                    />
-
-                    <label className="block mb-2 font-medium">Department</label>
-                    <input
-                        name="department"
-                        value={formData.department}
-                        onChange={handleChange}
-                        type="text"
-                        className="w-full dark:bg-transparent border dark:border-gray-900 rounded px-3 py-2 mb-4"
                         required
                     />
 
                     <label className="block mb-2 font-medium">Email</label>
                     <input
-                        name="adminEmail"
-                        value={formData.adminEmail}
-                        onChange={handleChange}
+                        name="email"
                         type="email"
+                        onChange={handleChange}
                         autoComplete="email"
                         className="w-full dark:bg-transparent border dark:border-gray-900 rounded px-3 py-2 mb-4"
                         required
                     />
 
-                    <label className="block mb-2 font-medium">category</label>
-                    <input
+                    <label className="block mb-2 font-medium">Category</label>
+                    <select
                         name="category"
-                        value={formData.category}
                         onChange={handleChange}
-                        type="email"
-                        autoComplete="email"
+                        className="w-full border dark:bg-transparent dark:border-gray-900 rounded px-3 py-2 mb-4"
+                        required
+                    >
+                        <option value="" selected disabled>--select category--</option>
+                        <option value="STAFF">STAFF</option>
+                    </select>
+
+                    <label className="block mb-2 font-medium">Department</label>
+                    <input
+                        name="dept"
+                        type="text"
+                        onChange={handleChange}
                         className="w-full dark:bg-transparent border dark:border-gray-900 rounded px-3 py-2 mb-4"
                         required
                     />
 
-                    <label className="block mb-2 font-medium">Upload Photo</label>
-                    <input
-                        name="photo"
-                        onChange={handleChange}
-                        type="file"
-                        accept="image/*"
-                        className="w-full dark:bg-transparent border dark:border-gray-900 rounded px-3 py-2 mb-6"
-                    />
+                    <div className="relative">
+                        <input
+                            id="facialImage"
+                            name="facialImage"
+                            type="file"
+                            accept="image/*"
+                            onChange={handleChange}
+                            className="hidden"
+                        />
+
+                        <label
+                            htmlFor="facialImage"
+                            className="w-full bg-green-600 text-white py-2 rounded hover:bg-green-700 text-center cursor-pointer inline-block"
+                        >
+                            Upload Facial Image
+                        </label>
+                    </div>
+
 
                     <button
                         type="submit"
-                        className="w-full bg-green-600 text-white py-2 rounded hover:bg-green-700"
+                        className="w-full bg-green-600 text-white my-4 py-2 rounded hover:bg-green-700"
                     >
-                        Register
+                        Submit
                     </button>
                 </form>
+
+                <p className="text-center text-sm mt-4">
+                    <Link to="/dashboard">
+                    <span
+                        href="../attebdance-record/attendanceResord.html"
+                        className="text-blue-500 hover:underline"
+                    >
+                        Back to Dashboard
+                    </span>
+                    </Link>
+                </p>
             </div>
+
+
+
+
+
+
+            <ConfirmationModal
+                data={confirmationDialog}
+                dataStateFunction={setConfirmationDialog}
+            />
         </div>
     );
 };

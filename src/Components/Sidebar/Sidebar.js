@@ -38,12 +38,16 @@ const Sidebar = () => {
             <Link to='/registerStudent'><p>Add New Student</p></Link>
           </div>
           <div className="side-link flex gap-4 items-center flex-col py-3 rounded-lg mx-7">
-            <i className="fa-solid text-[2.5rem] fa-database"></i>
-            <Link to="/record"><p>Record</p></Link>
+            <i className="fa-solid text-[2.5rem] fa-user"></i>
+            <Link to="/registerAdmin"><p>Add Lecturer</p></Link>
           </div>
           <div className="side-link flex gap-4 items-center flex-col py-3 rounded-lg mx-7">
-            <i className="fa-solid text-[2.5rem] fa-user"></i>
-            <Link to="/indexdb"><p>Students</p></Link>
+            <i className="fa-solid text-[2.5rem] fa-database"></i>
+            <Link to="/addCourse"><p>Add Course</p></Link>
+          </div>
+          <div className="side-link flex gap-4 items-center flex-col py-3 rounded-lg mx-7">
+            <i className="fa-solid text-[2.5rem] fa-database"></i>
+            <Link to="/record"><p>Record</p></Link>
           </div>
           
         </nav>

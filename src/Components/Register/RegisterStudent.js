@@ -39,6 +39,11 @@ const Register = () => {
     else
       alert('Unable to fetch courses. Kindly refresh')
   }, [])
+  
+    useEffect(() => {
+    fetchCourses();
+    fetchCategories();
+  }, [fetchCategories, fetchCourses]);
 
   const [confirmationDialog, setConfirmationDialog] = useState({
     showDialog: false,
@@ -79,11 +84,6 @@ const Register = () => {
       }));
     }
   };
-
-  useEffect(() => {
-    fetchCourses();
-    fetchCategories();
-  }, [fetchCategories, fetchCourses]);
 
   const handleOnSubmit = (event) => {
     event.preventDefault();
@@ -230,11 +230,6 @@ const Register = () => {
           </a>
         </p>
       </div>
-
-
-
-
-
 
       <ConfirmationModal
         data={confirmationDialog}

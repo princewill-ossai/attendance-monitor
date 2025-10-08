@@ -8,8 +8,7 @@ const CourseList = ({ courses, shouldDisplay }) => {
             {
                 courses.map(course => (
                     <Course className="w-[10rem]" 
-                        courseName={course.name}
-                        courseCode={course.code}
+                        course={course}
                     />
                 ))
             }
