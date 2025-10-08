@@ -67,7 +67,7 @@ const ViewCourseStudents = () => {
 
   return (
     <div className="bg-[#020221] w-full text-gray-100 min-h-screen">
-      <div className="flex flex-col md:flex-row h-screen">
+      <div className="flex flex-col md:flex-row min-h-screen">
         <div id="sidebar-root"></div>
 
         <main className="flex-1 p-4 sm:p-6 md:p-8 overflow">

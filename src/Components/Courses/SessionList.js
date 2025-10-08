@@ -10,7 +10,7 @@ const SessionList = ({sessions, shouldDisplay}) => {
             return
         }
 
-        navigate(`mark-attendance/${session.id}`, {state: {session}})
+        navigate(`/mark-attendance/${session.id}`, {state: {session}})
     }
 
   return (

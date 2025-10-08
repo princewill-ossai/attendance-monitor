@@ -46,7 +46,7 @@ const Record = () => {
   };
 
   return (
-    <div className="bg-[#020221] w-full text-gray-100 min-h-screen">
+    <div className="bg-[#020221] w-full text-gray-100 h-full">
       <div className="flex flex-col md:flex-row h-screen">
         <div id="sidebar-root"></div>
 

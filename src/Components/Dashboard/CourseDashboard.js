@@ -48,14 +48,7 @@ const CourseDashboard = () => {
         <h3 className="text-lg font-semibold mb-4">Attendance</h3>
         <canvas id="attendanceChart" height="100"></canvas>
       </div>
-      <div className="bg-[#0707418c] p-6 rounded-xl shadow-md">
-        <h3 className="text-lg font-semibold mb-4">Quick Links</h3>
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-          <Link to='/sessions'><a className="block bg-blue-600 hover:bg-blue-700 text-center py-2 rounded-lg">Start Session</a></Link>
-          <a href="records.html" className="block bg-green-600 hover:bg-green-700 text-center py-2 rounded-lg">View Records</a>
-          <Link to='/addCourse'><a className="block bg-purple-600 hover:bg-purple-700 text-center py-2 rounded-lg">Add Course</a></Link>
-        </div>
-      </div>
+      
     </section>
 
     {/* <script>

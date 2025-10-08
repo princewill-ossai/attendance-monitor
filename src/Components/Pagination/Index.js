@@ -55,55 +55,61 @@ const PaginationUtil = ({ pageRequest, setPageRequestFxn, fetchItemsFxn, totalPa
     }
 
     return (
-        <div className="mt-[19rem]">
-            <div className="pg-border" />
-            <div className="flex justify-between items-center py-1">
-                <div className="col-md-3">
+        <div className="mt-10 w-full">
+            <div className="border-t border-gray-300 mt-10" />
+
+            <div className="flex flex-col md:flex-row justify-between items-center gap-4 py-4">
+
+                <div className="text-sm text-gray-700">
                     {`Page ${pageRequest.page} of ${totalPages}`}
                 </div>
-                <div className="col-md-5">
+
+                <div className="flex justify-center">
                     <ReactPaginate
                         previousLabel={'Prev'}
                         nextLabel={'Next'}
                         breakLabel={'...'}
                         pageCount={totalPages}
-                        pageRangeDisplayed={5}
-                        marginPagesDisplayed={2}
+                        pageRangeDisplayed={3}
+                        marginPagesDisplayed={1}
                         onPageChange={handlePageClick}
-                        activeClassName={'active'}
-                        containerClassName={'pagination d-flex justify-content-center align-items-center'}
+                        activeClassName={'bg-blue-500 text-white rounded'}
+                        containerClassName={'flex flex-wrap items-center gap-2 text-sm'}
+                        pageClassName={'px-3 py-1 border rounded hover:bg-gray-100'}
+                        previousClassName={'px-3 py-1 border rounded hover:bg-gray-100'}
+                        nextClassName={'px-3 py-1 border rounded hover:bg-gray-100'}
                     />
                 </div>
-                <div className="flex gap-4 col-md-4 justify-content-end px-0 mx-0">
-                    <div className="col-md-5">
-                        <select
-                            onChange={handleSizeChange}
-                            className="form-select form-control-select"
-                        >
-                            <option value="10">10/page</option>
-                            <option value="30">30/page</option>
-                            <option value="50">50/page</option>
-                            <option value="70">70/page</option>
-                            <option value="100">100/page</option>
-                            <option value="150">150/page</option>
-                            <option value="200">200/page</option>
-                            <option value="50">500/page</option>
-                        </select>
-                    </div>
-                    <div className="col-md-5">
-                        <input
-                            onChange={handlePageChange}
-                            type="number"
-                            min="1"
-                            step="1" 
-                            className="form-control form-control-style"
-                            placeholder="Enter page"
-                            name="page"
-                        />
-                    </div>
+
+                <div className="flex flex-wrap justify-end gap-3 items-center">
+                    <select
+                        onChange={handleSizeChange}
+                        className="border border-gray-300 rounded-md px-2 py-1 text-sm focus:outline-none focus:ring-1 focus:ring-blue-500"
+                    >
+                        <option value="10">10/page</option>
+                        <option value="30">30/page</option>
+                        <option value="50">50/page</option>
+                        <option value="70">70/page</option>
+                        <option value="100">100/page</option>
+                        <option value="150">150/page</option>
+                        <option value="200">200/page</option>
+                        <option value="500">500/page</option>
+                    </select>
+
+                    <input
+                        onChange={handlePageChange}
+                        type="number"
+                        min="1"
+                        step="1"
+                        className="w-24 border border-gray-300 rounded-md px-2 py-1 text-sm focus:outline-none focus:ring-1 focus:ring-blue-500"
+                        placeholder="Enter page"
+                        name="page"
+                    />
                 </div>
             </div>
         </div>
+      
+
     )
 }
 

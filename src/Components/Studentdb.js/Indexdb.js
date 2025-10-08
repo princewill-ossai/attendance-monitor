@@ -28,11 +28,10 @@ const Indexdb = () => {
   });
 
   return (
-    <div className="bg-[#020221] w-full text-gray-100 min-h-screen">
-      <div className="flex flex-col md:flex-row h-screen">
-        <div id="sidebar-root"></div>
+    <div className="bg-[#020221] w-full text-gray-100 h-full">
+      <div className="flex flex-col md:flex-row h-full">
 
-        <main className="flex-1 p-4 sm:p-6 md:p-8 overflow">
+            <main className="flex-1 p-4 sm:p-6 md:p-8 overflow">
           <header className="flex flex-wrap items-center justify-between gap-4 mb-6">
             <div>
               <h1 className="text-2xl font-semibold">Attendance Records</h1>

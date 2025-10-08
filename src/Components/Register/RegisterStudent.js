@@ -109,10 +109,7 @@ const Register = () => {
   return (
     <div className="overflow-y bg-gray-100 dark:bg-[#020217] flex items-center font-bold justify-center h-screen">
       <div className="bg-white relative dark:bg-[#020221] text-gray-200 shadow-lg rounded-lg p-8 w-full max-w-md">
-        <button className="bg-gray-800 absolute right-5 px-4 py-2 rounded-lg">
-          &lArr; Dashboard
-        </button>
-        <h1 className="text-2xl pt-16 font-bold mb-6">Add New Student</h1>
+        <h1 className="text-2xl font-bold mb-5">Add New Student</h1>
 
         <form onSubmit={handleOnSubmit}>
           <label className="block mb-2 font-medium">First Name</label>
