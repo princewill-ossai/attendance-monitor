@@ -24,8 +24,10 @@ const ConfirmationModal = ({ data, dataStateFunction }) => {
         let response;
         if (data.method === 'POST') {
             response = await post(data.endpoint, data.request, getJsonHeader());
+            console.log("String", data.endpoint)
         } else if (data.method === 'POST_FORM_DATA') {
             response = await post(data.endpoint, data.request, getFormDataHeader());
+            console.log("String", data.endpoint)
         } else {
 
         }

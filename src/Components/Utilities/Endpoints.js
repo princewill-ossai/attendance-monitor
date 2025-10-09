@@ -8,4 +8,4 @@ export const registerCourse = `${baseUrl}/course/registration`
 export const getCategories = `${baseUrl}/user/categories`
 export const getCourseList = `${baseUrl}/course/list`
 export const sessionUrl = `${baseUrl}/attendance/session`
-export const markAttendanceUrl = `${baseUrl}/attendance`
+export const attendanceUrl = `${baseUrl}/attendance`

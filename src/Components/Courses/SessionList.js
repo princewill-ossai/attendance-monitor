@@ -5,10 +5,11 @@ const SessionList = ({ sessions, shouldDisplay }) => {
   const navigate = useNavigate()
   const handleOnClick = (session) => {
     if (session.status === 'INACTIVE') {
-      alert("Cannot mark attendance for a closed session!")
-      return
+      navigate(`/view-attendance/${session.id}`, { state: { session } })
+    } else {
+      navigate(`/mark-attendance/${session.id}`, { state: { session } })
     }
-    navigate(`/mark-attendance/${session.id}`, { state: { session } })
+    
   }
 
   return (

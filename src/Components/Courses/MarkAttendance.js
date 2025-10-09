@@ -1,14 +1,14 @@
 import React, { useRef, useState } from 'react'
 import Webcam from 'react-webcam'
 import { Camera } from 'lucide-react'
-import { markAttendanceUrl } from '../Utilities/Endpoints';
+import { attendanceUrl } from '../Utilities/Endpoints';
 import ConfirmationModal from '../Modal/ConfirmationModal';
 import { useLocation } from 'react-router-dom';
-
 
 const MarkAttendance = () => {
   const webcamRef = useRef(null);
   const [images, setImages] = useState([])
+
   const [confirmationDialog, setConfirmationDialog] = useState({
     showDialog: false,
     processing: false,
@@ -16,10 +16,11 @@ const MarkAttendance = () => {
     parent: false,
     error: false,
     request: null,
-    endpoint: `${markAttendanceUrl}`,
+    endpoint: `${attendanceUrl}`,
     method: "POST_FORM_DATA",
     landingPage: "/dashboard"
   });
+
   const location = useLocation();
   const { session } = location.state || {}
 
@@ -29,25 +30,33 @@ const MarkAttendance = () => {
     const bstr = atob(arr[1]);
     let n = bstr.length;
     const u8arr = new Uint8Array(n);
+
     while (n--) {
       u8arr[n] = bstr.charCodeAt(n);
     }
+
     return new File([u8arr], filename, { type: mime });
   };
 
   const capture = () => {
     const imageSrc = webcamRef.current.getScreenshot();
+
     if (imageSrc) {
       setImages((prev) => [...prev, imageSrc]);
     }
   };
 
   const uploadAll = () => {
+    if (images.length === 0) {
+      alert("Kindly take a snapshot");
+      return;
+    }
+
     const request = new FormData();
 
     images.forEach((img, index) => {
       const file = base64ToFile(img, `student_${index + 1}.jpg`)
-      
+
       request.append("sessionId", session.id)
       request.append("facialImages", file)
     })
@@ -69,6 +78,7 @@ const MarkAttendance = () => {
             Mark Attendance
           </h1>
         </div>
+
         <div className="relative">
           <Webcam
             ref={webcamRef}
@@ -81,17 +91,22 @@ const MarkAttendance = () => {
               height: { ideal: 480 },
             }}
           />
+
           <div className="absolute inset-0 rounded-xl ring-2 ring-indigo-500/20 hover:ring-indigo-400/40 transition-all duration-300"></div>
         </div>
+
         <p className="text-sm text-gray-400 leading-relaxed">
           Please ensure your face is clearly visible and the camera is well lit.
         </p>
+
         <button onClick={capture} className="bg-indigo-500 hover:bg-indigo-600 active:scale-95 transition-all duration-300 text-white font-medium py-2.5 px-6 rounded-lg shadow-md w-full sm:w-auto">
           Capture
         </button>
+
         <button onClick={uploadAll} className="bg-indigo-500 hover:bg-indigo-600 active:scale-95 transition-all duration-300 text-white font-medium py-2.5 px-6 mx-2 rounded-lg shadow-md w-full sm:w-auto">
           Upload All
         </button>
+
         <div className="grid grid-cols-4 gap-2 mt-4">
           {images.map((src, i) => (
             <img key={i} src={src} alt={`capture-${i}`} className="w-32 h-24 object-cover rounded shadow" />
