@@ -137,11 +137,7 @@ const Register = () => {
             required
           >
             <option value="" selected disabled>--select category--</option>
-            {
-              categories.map(category => (
-                <option value={category}>{toSentenceCase(category)}</option>
-              ))
-            }
+                <option className="text-black font-bold">Student</option>
           </select>
           <label className="block mb-2 font-medium">Department</label>
           <input
@@ -162,7 +158,7 @@ const Register = () => {
             <option value="" selected disabled>--select course(s)--</option>
             {
               courses.map(course => (
-                <option value={course.id}>{`${course.code} - ${course.name}`}</option>
+                <option className="font-bold" value={course.id}>{`${course.code} - ${course.name}`}</option>
               ))
             }
           </select>

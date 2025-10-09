@@ -23,7 +23,7 @@ const Sidebar = () => {
       </button>
       <aside
         id="global-sidebar"
-        className={`fixed top-0 left-0 h-screen w-64 bg-[#020217] text-gray-200 transform
+        className={`fixed top-0 left-0 min-h-screen w-64 bg-[#020217] text-gray-200 transform
         ${isOpen ? "translate-x-0" : "-translate-x-full"}
         transition-transform duration-300 ease-in-out z-50
         lg:translate-x-0 lg:static lg:block overflow-y-auto`}

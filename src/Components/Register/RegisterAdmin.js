@@ -99,8 +99,8 @@ const RegisterAdmin = () => {
                         className="w-full border dark:bg-transparent dark:border-gray-900 rounded px-3 py-2 mb-4"
                         required
                     >
-                        <option value="" selected disabled>--select category--</option>
-                        <option value="STAFF">STAFF</option>
+                        <option className="text-black" value="" selected disabled>--select category--</option>
+                        <option className="text-black font-bold" value="STAFF">STAFF</option>
                     </select>
 
                     <label className="block mb-2 font-medium">Department</label>
