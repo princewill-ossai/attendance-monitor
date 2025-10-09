@@ -13,19 +13,19 @@ const Register = () => {
     firstname: "",
     lastname: "",
     dept: "",
-    category: "",
+    category: "STUDENT",
     courses: [],
     email: "",
     facialImage: null,
   });
-  const fetchCategories = useCallback(async () => {
-    const response = await get(`${getCategories}`, getJsonHeader())
+  // const fetchCategories = useCallback(async () => {
+  //   const response = await get(`${getCategories}`, getJsonHeader())
 
-    if (response.code === '00' && response.data.length !== 0)
-      setCategories(response.data)
-    else
-      alert('Unable to fetch categories. Kindly refresh')
-  }, [])
+  //   if (response.code === '00' && response.data.length !== 0)
+  //     setCategories(response.data)
+  //   else
+  //     alert('Unable to fetch categories. Kindly refresh')
+  // }, [])
   const fetchCourses = useCallback(async () => {
     const response = await get(`${getCourseList}`, getJsonHeader())
 
@@ -37,8 +37,8 @@ const Register = () => {
 
   useEffect(() => {
     fetchCourses();
-    fetchCategories();
-  }, [fetchCategories, fetchCourses]);
+    // fetchCategories();
+  }, [fetchCourses]);
   const [confirmationDialog, setConfirmationDialog] = useState({
     showDialog: false,
     processing: false,
@@ -58,7 +58,8 @@ const Register = () => {
       const selectedValues = Array.from(options)
         .filter(opt => opt.selected)
         .map(opt => parseInt(opt.value));
-      console.log(selectedValues)
+
+      console.log("Courses value", selectedValues)
       setUserData((prev) => ({
         ...prev,
         [name]: selectedValues,
@@ -74,7 +75,7 @@ const Register = () => {
     event.preventDefault();
 
     const request = new FormData();
-    request.append("regNo", userData.regNo.trim());
+    request.append("regNo", userData.regNo.trim().toUpperCase());
     request.append("firstname", userData.firstname.trim());
     request.append("lastname", userData.lastname.trim());
     request.append("courses", userData.courses);
@@ -131,7 +132,7 @@ const Register = () => {
             required
           />
           <label className="block mb-2 font-medium">Category</label>
-          <select
+          {/* <select
             name="category"
             onChange={handleChange}
             className="w-full border dark:bg-transparent dark:border-gray-900 rounded px-3 py-2 mb-4"
@@ -139,7 +140,7 @@ const Register = () => {
           >
             <option value="" disabled>--select category--</option>
             <option className="text-black font-bold">Student</option>
-          </select>
+          </select> */}
           <label className="block mb-2 font-medium">Department</label>
           <input
             name="dept"
