@@ -6,7 +6,7 @@ import ConfirmationModal from '../Modal/ConfirmationModal';
 
 const MarkAttendance = () => {
   const webcamRef = useRef(null);
-  const [image, setImage] = useState(null)
+  const [images, setImages] = useState([])
   const [confirmationDialog, setConfirmationDialog] = useState({
     showDialog: false,
     processing: false,
@@ -18,11 +18,31 @@ const MarkAttendance = () => {
     method: "POST_FORM_DATA",
     landingPage: "/dashboard"
   });
+  const base64ToFile = (base64, filename) => {
+    const arr = base64.split(",");
+    const mime = arr[0].match(/:(.*?);/)[1];
+    const bstr = atob(arr[1]);
+    let n = bstr.length;
+    const u8arr = new Uint8Array(n);
+    while (n--) {
+      u8arr[n] = bstr.charCodeAt(n);
+    }
+    return new File([u8arr], filename, { type: mime });
+  };
+
   const capture = () => {
     const imageSrc = webcamRef.current.getScreenshot();
-    setImage(imageSrc);
+    if (imageSrc) {
+      setImages((prev) => [...prev, imageSrc]);
+    }
+  };
+  const uploadAll = () => {
     const request = new FormData();
-    request.append("facialImage", imageSrc);
+    images.forEach((img, index) => {
+      const file = base64ToFile(img, `student_${index + 1}.jpg`)
+      request.append("files", file)
+    })
+
     setConfirmationDialog(prev => ({
       ...prev,
       showDialog: true,
@@ -58,8 +78,16 @@ const MarkAttendance = () => {
           Please ensure your face is clearly visible and the camera is well lit.
         </p>
         <button onClick={capture} className="bg-indigo-500 hover:bg-indigo-600 active:scale-95 transition-all duration-300 text-white font-medium py-2.5 px-6 rounded-lg shadow-md w-full sm:w-auto">
-          Capture & Submit
+          Capture
         </button>
+        <button onClick={uploadAll} className="bg-indigo-500 hover:bg-indigo-600 active:scale-95 transition-all duration-300 text-white font-medium py-2.5 px-6 mx-2 rounded-lg shadow-md w-full sm:w-auto">
+          Upload All
+        </button>
+        <div className="grid grid-cols-4 gap-2 mt-4">
+          {images.map((src, i) => (
+            <img key={i} src={src} alt={`capture-${i}`} className="w-32 h-24 object-cover rounded shadow" />
+          ))}
+        </div>
       </div>
 
       <ConfirmationModal

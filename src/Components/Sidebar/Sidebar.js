@@ -40,21 +40,21 @@ const Sidebar = () => {
             { to: '/registerAdmin', icon: 'fa-user', label: 'Add Lecturer' },
             { to: '/addCourse', icon: 'fa-clipboard-list', label: 'Add Course' },
           ].map((item, index) => (
-            <div
-              key={index}
-              onClick={handleLinkClick}
-              className="side-link flex gap-4 items-center flex-col py-3 rounded-lg mx-7 cursor-pointer hover:bg-[rgba(255,255,255,0.05)]"
-            >
-              <i className={`fa-solid text-[2.5rem] ${item.icon}`}></i>
-              <Link to={item.to}>
+            <Link to={item.to}>
+              <div
+                key={index}
+                onClick={handleLinkClick}
+                className="side-link flex gap-4 items-center flex-col py-3 rounded-lg mx-7 cursor-pointer hover:bg-[rgba(255,255,255,0.05)]"
+              >
+                <i className={`fa-solid text-[2.5rem] ${item.icon}`}></i>
                 <p>{item.label}</p>
-              </Link>
-            </div>
+              </div>
+            </Link>
           ))}
         </nav>
         <div className="p-6 rounded-xl">
           <Link to='/newSession' onClick={handleLinkClick}>
-            <div className='flex flex-col items-center gap-2'>
+            <div className='side-link flex gap-4 items-center flex-col py-3 rounded-lg mx-7 cursor-pointer hover:bg-[rgba(255,255,255,0.05)]'>
               <i className="fa-solid text-[3rem] fa-chalkboard-user"></i>
               <span className="text-center py-2">
                 Start Session
@@ -88,7 +88,7 @@ const Sidebar = () => {
           </Link>
         </div>
       </aside>
-    </div>
+    </div >
   )
 }
 
