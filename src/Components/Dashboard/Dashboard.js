@@ -17,23 +17,19 @@ const Dashboard = () => {
   const [courses, setCourses] = useState([]);
   const [pageRequest, setPageRequest] = useState({ page: 1, size: 10 });
   const [totalPages, setTotalPages] = useState(0);
-
   const fetchCourses = useCallback(async (page, size) => {
     setRender({
       loader: true,
       table: false,
       emptyFolder: false
     })
-
     const response = await get(`${coursesUrl}?page=${page}&size=${size}`, getJsonHeader())
-
     if (response.code === '00' && response.data.content.length !== 0) {
       setRender({
         loader: false,
         table: true,
         emptyFolder: false
       })
-
       setCourses(response.data.content)
       setTotalPages(response.data.totalElements)
     } else {
@@ -52,7 +48,6 @@ const Dashboard = () => {
   return (
     <div className='w-full'>
       <div className="bg-[#020221] text-white font-sans flex flex-col md:flex-row">
-
         <div className="flex-1 min-h-screen pt-6 flex flex-col">
           <section className="px-6">
             <h2 className="text-2xl font-bold mb-6">Courses</h2>
@@ -71,7 +66,6 @@ const Dashboard = () => {
                 />
               ]
             }
-
 
           </section>
         </div>

@@ -1,11 +1,10 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
 
-const Course = ({course}) => {
+const Course = ({ course }) => {
     const navigate = useNavigate()
-
     const handleClick = () => {
-        navigate(`/course/${course.id}`, {state: {course}})
+        navigate(`/course/${course.id}`, { state: { course } })
     }
 
     return (

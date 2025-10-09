@@ -5,36 +5,36 @@ import { toSentenceCase } from "../Utilities/StringUtils";
 import ConfirmationModal from "../Modal/ConfirmationModal";
 
 const NewSession = () => {
-      const [lecturers, setLecturers] = useState([]);
-      const [courses, setCourses] = useState([{}])
-      const [courseData, setCourseData] = useState({
-          courseId: "",
-          handlerId: null,
-        });
+  const [lecturers, setLecturers] = useState([]);
+  const [courses, setCourses] = useState([{}])
+  const [courseData, setCourseData] = useState({
+    courseId: "",
+    handlerId: null,
+  });
 
-      const fetchLecturers = useCallback(async () => {
-        const response = await get(`${getLecturersList}`, getJsonHeader());
-        if (response.code === "00" && response.data.length !== 0)
-          setLecturers(response.data);
-        else alert("Unable to fetch lecturers. Kindly refresh.");
-      }, []);
+  const fetchLecturers = useCallback(async () => {
+    const response = await get(`${getLecturersList}`, getJsonHeader());
+    if (response.code === "00" && response.data.length !== 0)
+      setLecturers(response.data);
+    else alert("Unable to fetch lecturers. Kindly refresh.");
+  }, []);
 
-      const fetchCourses = useCallback(async () => {
-          const response = await get(`${getCourseList}`, getJsonHeader())
-      
-          if (response.code === '00' && response.data.length !== 0)
-            setCourses(response.data)
-          else
-            alert('Unable to fetch courses. Kindly refresh')
-        }, [])
-    
-      useEffect(() => {
-        fetchLecturers();
-        fetchCourses()
-      }, [fetchLecturers, fetchCourses]);
+  const fetchCourses = useCallback(async () => {
+    const response = await get(`${getCourseList}`, getJsonHeader())
 
-    const handleChange = (event) => {
-    const { name, value, type} = event.target;
+    if (response.code === '00' && response.data.length !== 0)
+      setCourses(response.data)
+    else
+      alert('Unable to fetch courses. Kindly refresh')
+  }, [])
+
+  useEffect(() => {
+    fetchLecturers();
+    fetchCourses()
+  }, [fetchLecturers, fetchCourses]);
+
+  const handleChange = (event) => {
+    const { name, value, type } = event.target;
     if (type === 'select-one') {
       setCourseData((prev) => ({
         ...prev,
@@ -47,27 +47,25 @@ const NewSession = () => {
       }));
     }
   };
-
-    const [confirmationDialog, setConfirmationDialog] = useState({
-      showDialog: false,
-      processing: false,
-      successful: false,
-      parent: false,
-      error: false,
-      request: null,
-      endpoint: `${sessionUrl}`,
-      method: "POST",
-      landingPage: "/dashboard",
-    });
-
-  const handleSubmit = async (event) => { 
+  const [confirmationDialog, setConfirmationDialog] = useState({
+    showDialog: false,
+    processing: false,
+    successful: false,
+    parent: false,
+    error: false,
+    request: null,
+    endpoint: `${sessionUrl}`,
+    method: "POST",
+    landingPage: "/dashboard",
+  });
+  const handleSubmit = async (event) => {
     event.preventDefault();
-      setConfirmationDialog((prev) => ({
-        ...prev,
-        showDialog: true,
-        parent: true,
-        request: courseData,
-      }));
+    setConfirmationDialog((prev) => ({
+      ...prev,
+      showDialog: true,
+      parent: true,
+      request: courseData,
+    }));
   };
 
   return (
@@ -79,7 +77,6 @@ const NewSession = () => {
           &larr; Dashboard
         </button>
         <h1 className="text-2xl pt-16 font-bold mb-6">Start Session</h1>
-
         <form onSubmit={handleSubmit}>
           <label className="block mb-2 font-medium">Courses</label>
           <select
@@ -96,26 +93,24 @@ const NewSession = () => {
               ))
             }
           </select>
-
           <label className="block mb-2 font-medium">Course Handler</label>
-                    <select
-                      name="handlerId"
-                      onChange={handleChange}
-                      className="w-full dark:bg-transparent border dark:border-gray-900 rounded px-3 py-2 mb-4"
-                      required
-                    >
-                      <option value="" disabled selected>
-                        --select handler--
-                      </option>
-                      {lecturers.map((lecturer) => (
-                        <option key={lecturer.id} value={lecturer.id}>
-                          {`${toSentenceCase(lecturer.firstname)} ${toSentenceCase(
-                            lecturer.lastname
-                          )}`}
-                        </option>
-                      ))}
-                    </select>
-
+          <select
+            name="handlerId"
+            onChange={handleChange}
+            className="w-full dark:bg-transparent border dark:border-gray-900 rounded px-3 py-2 mb-4"
+            required
+          >
+            <option value="" disabled selected>
+              --select handler--
+            </option>
+            {lecturers.map((lecturer) => (
+              <option key={lecturer.id} value={lecturer.id}>
+                {`${toSentenceCase(lecturer.firstname)} ${toSentenceCase(
+                  lecturer.lastname
+                )}`}
+              </option>
+            ))}
+          </select>
           <button
             type="submit"
             className="w-full bg-green-600 text-white py-2 rounded hover:bg-green-700"
@@ -125,9 +120,9 @@ const NewSession = () => {
         </form>
       </div>
 
-        <ConfirmationModal
-            data={confirmationDialog}
-            dataStateFunction={setConfirmationDialog}
+      <ConfirmationModal
+        data={confirmationDialog}
+        dataStateFunction={setConfirmationDialog}
       />
     </div>
   );

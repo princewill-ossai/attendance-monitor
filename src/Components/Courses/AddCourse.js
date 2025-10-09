@@ -28,7 +28,6 @@ const AddCourse = () => {
 
   const handleChange = (event) => {
     const { name, value, type } = event.target;
-
     if (type === 'select-one') {
       setCourseData((prev) => ({
         ...prev,
@@ -41,7 +40,6 @@ const AddCourse = () => {
       }));
     }
   };
-
   const [confirmationDialog, setConfirmationDialog] = useState({
     showDialog: false,
     processing: false,
@@ -54,15 +52,14 @@ const AddCourse = () => {
     landingPage: "/dashboard",
   });
 
-  const handleSubmit = async (event) => { 
+  const handleSubmit = async (event) => {
     event.preventDefault();
-
-      setConfirmationDialog((prev) => ({
-        ...prev,
-        showDialog: true,
-        parent: true,
-        request: courseData,
-      }));
+    setConfirmationDialog((prev) => ({
+      ...prev,
+      showDialog: true,
+      parent: true,
+      request: courseData,
+    }));
   };
 
   return (
@@ -75,7 +72,6 @@ const AddCourse = () => {
           &larr; Dashboard
         </button>
         <h1 className="text-2xl pt-16 font-bold mb-6">Add New Course</h1>
-
         <form onSubmit={handleSubmit}>
           <label className="block mb-2 font-medium">Course Name</label>
           <input
@@ -113,7 +109,6 @@ const AddCourse = () => {
               </option>
             ))}
           </select>
-
           <button
             type="submit"
             className="w-full bg-green-600 text-white py-2 rounded hover:bg-green-700"

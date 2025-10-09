@@ -3,31 +3,24 @@ import { Link } from 'react-router-dom'
 
 const Sidebar = () => {
   const [isOpen, setIsOpen] = useState(false)
-
-  // Close sidebar on link click (for mobile)
   const handleLinkClick = () => {
     if (window.innerWidth < 1024) setIsOpen(false)
   }
 
   return (
     <div className="flex">
-      {/* Overlay for mobile */}
       {isOpen && (
         <div
           onClick={() => setIsOpen(false)}
           className="fixed inset-0 bg-black bg-opacity-50 z-40 lg:hidden"
         ></div>
       )}
-
-      {/* Hamburger Button */}
       <button
         onClick={() => setIsOpen(!isOpen)}
         className="lg:hidden p-3 text-white bg-[#020217] fixed top-4 left-4 z-50 rounded-md shadow-lg"
       >
         {isOpen ? "✖" : "☰"}
       </button>
-
-      {/* Sidebar */}
       <aside
         id="global-sidebar"
         className={`fixed top-0 left-0 h-screen w-64 bg-[#020217] text-gray-200 transform
@@ -40,15 +33,12 @@ const Sidebar = () => {
             <div className="text-lg font-semibold">Smart Attendance</div>
           </div>
         </div>
-
-        {/* Navigation */}
         <nav className="flex flex-col gap-7 px-2 py-4 space-y-1">
           {[
             { to: '/dashboard', icon: 'fa-th-large', label: 'Dashboard' },
-            { to: '/registerStudent', icon: 'fa-clipboard-list', label: 'Add New Student' },
+            { to: '/registerStudent', icon: 'fa-graduation-cap', label: 'Add New Student' },
             { to: '/registerAdmin', icon: 'fa-user', label: 'Add Lecturer' },
-            { to: '/addCourse', icon: 'fa-database', label: 'Add Course' },
-            { to: '/record', icon: 'fa-database', label: 'Record' },
+            { to: '/addCourse', icon: 'fa-clipboard-list', label: 'Add Course' },
           ].map((item, index) => (
             <div
               key={index}
@@ -62,22 +52,16 @@ const Sidebar = () => {
             </div>
           ))}
         </nav>
-
-        {/* Buttons */}
         <div className="p-6 rounded-xl">
           <Link to='/newSession' onClick={handleLinkClick}>
-            <span className="block mb-2 bg-blue-600 hover:bg-blue-700 text-center py-2 rounded-lg">
-              Start Session
-            </span>
-          </Link>
-          <Link to='/addCourse' onClick={handleLinkClick}>
-            <span className="block mb-2 bg-purple-600 hover:bg-purple-700 text-center py-2 rounded-lg">
-              Add Course
-            </span>
+            <div className='flex flex-col items-center gap-2'>
+              <i className="fa-solid text-[3rem] fa-chalkboard-user"></i>
+              <span className="text-center py-2">
+                Start Session
+              </span>
+            </div>
           </Link>
         </div>
-
-        {/* Logout */}
         <div className="mt-auto px-4 border-t border-[rgba(255,255,255,0.03)] sticky bottom-0 bg-[#020217]">
           <Link
             to="/adminLogin"

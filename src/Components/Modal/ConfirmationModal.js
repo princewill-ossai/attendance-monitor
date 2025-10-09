@@ -6,15 +6,12 @@ import bad_tick from "../../Assets/bad_tick.png";
 import { useContext, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { get, getFormDataHeader, getJsonHeader, post } from "../Utilities/HttpClientUtil";
-
 /*
     This modal should be reusable
 */
-
 const ConfirmationModal = ({ data, dataStateFunction }) => {
     const modalRef = useRef(null);
     const navigate = useNavigate();
-
     const handleConfirm = async () => {
         dataStateFunction((prev) => ({
             ...prev,
@@ -24,9 +21,7 @@ const ConfirmationModal = ({ data, dataStateFunction }) => {
             error: false,
             parent: true
         }));
-
         let response;
-
         if (data.method === 'POST') {
             response = await post(data.endpoint, data.request, getJsonHeader());
         } else if (data.method === 'POST_FORM_DATA') {
@@ -34,7 +29,6 @@ const ConfirmationModal = ({ data, dataStateFunction }) => {
         } else {
 
         }
-
         if (response && response.code === "00") {
             dataStateFunction((prev) => ({
                 ...prev,
