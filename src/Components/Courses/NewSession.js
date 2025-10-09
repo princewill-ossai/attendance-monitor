@@ -81,7 +81,6 @@ const NewSession = () => {
           <label className="block mb-2 font-medium">Courses</label>
           <select
             name="courseId"
-            multiple
             type="text"
             onChange={handleChange}
             className="w-full border dark:bg-transparent dark:border-gray-900 rounded px-3 py-2 mb-4"
