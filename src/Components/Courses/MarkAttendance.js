@@ -1,8 +1,10 @@
 import React, { useRef, useState } from 'react'
 import Webcam from 'react-webcam'
 import { Camera } from 'lucide-react'
-import { registerStudentUrl } from '../Utilities/Endpoints';
+import { markAttendanceUrl } from '../Utilities/Endpoints';
 import ConfirmationModal from '../Modal/ConfirmationModal';
+import { useLocation } from 'react-router-dom';
+
 
 const MarkAttendance = () => {
   const webcamRef = useRef(null);
@@ -14,10 +16,13 @@ const MarkAttendance = () => {
     parent: false,
     error: false,
     request: null,
-    endpoint: `${registerStudentUrl}`,
+    endpoint: `${markAttendanceUrl}`,
     method: "POST_FORM_DATA",
     landingPage: "/dashboard"
   });
+  const location = useLocation();
+  const { session } = location.state || {}
+
   const base64ToFile = (base64, filename) => {
     const arr = base64.split(",");
     const mime = arr[0].match(/:(.*?);/)[1];
@@ -36,11 +41,15 @@ const MarkAttendance = () => {
       setImages((prev) => [...prev, imageSrc]);
     }
   };
+
   const uploadAll = () => {
     const request = new FormData();
+
     images.forEach((img, index) => {
       const file = base64ToFile(img, `student_${index + 1}.jpg`)
-      request.append("files", file)
+      
+      request.append("sessionId", session.id)
+      request.append("facialImages", file)
     })
 
     setConfirmationDialog(prev => ({
@@ -52,7 +61,7 @@ const MarkAttendance = () => {
   }
 
   return (
-    <div className="bg-[#0A0A1A] text-gray-200 flex flex-col items-center justify-center min-h-screen px-4 py-6">
+    <div className="bg-[#0A0A1A] flex flex-col items-center justify-center min-h-screen px-4 py-6">
       <div className="bg-[#111132] rounded-2xl shadow-2xl p-6 sm:p-8 w-full max-w-sm sm:max-w-md md:max-w-lg text-center border border-gray-700 space-y-6">
         <div className="flex items-center justify-center gap-2">
           <Camera className="text-indigo-400 w-6 h-6 sm:w-7 sm:h-7" />
