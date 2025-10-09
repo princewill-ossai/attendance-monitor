@@ -92,7 +92,7 @@ const RegisterAdmin = () => {
                         className="w-full dark:bg-transparent border dark:border-gray-900 rounded px-3 py-2 mb-4"
                         required
                     />
-                    <label className="block mb-2 font-medium">Category</label>
+                    {/* <label className="block mb-2 font-medium">Category</label> */}
                     {/* <select
                         name="category"
                         onChange={handleChange}
