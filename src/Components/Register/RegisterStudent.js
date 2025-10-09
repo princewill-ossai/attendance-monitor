@@ -3,6 +3,7 @@ import { getCategories, getCourseList, registerStudentUrl } from "../Utilities/E
 import { get, getJsonHeader } from "../Utilities/HttpClientUtil";
 import { toSentenceCase } from "../Utilities/StringUtils";
 import ConfirmationModal from "../Modal/ConfirmationModal";
+import { Link } from "react-router-dom";
 
 const Register = () => {
   const [categories, setCategories] = useState([])
@@ -90,7 +91,7 @@ const Register = () => {
   }
 
   return (
-    <div className="overflow-y bg-gray-100 dark:bg-[#020217] flex items-center font-bold justify-center h-screen">
+    <div className="overflow-y bg-gray-100 dark:bg-[#020217] flex items-center font-bold justify-center min-h-screen">
       <div className="bg-white relative dark:bg-[#020221] text-gray-200 shadow-lg rounded-lg p-8 w-full max-w-md">
         <h1 className="text-2xl font-bold mb-5">Add New Student</h1>
         <form onSubmit={handleOnSubmit}>
@@ -136,8 +137,8 @@ const Register = () => {
             className="w-full border dark:bg-transparent dark:border-gray-900 rounded px-3 py-2 mb-4"
             required
           >
-            <option value="" selected disabled>--select category--</option>
-                <option className="text-black font-bold">Student</option>
+            <option value="" disabled>--select category--</option>
+            <option className="text-black font-bold">Student</option>
           </select>
           <label className="block mb-2 font-medium">Department</label>
           <input
@@ -186,12 +187,13 @@ const Register = () => {
           </button>
         </form>
         <p className="text-center text-sm mt-4">
-          <a
-            href="../attebdance-record/attendanceResord.html"
-            className="text-blue-500 hover:underline"
-          >
-            Back to Dashboard
-          </a>
+          <Link to="/dashboard">
+            <span
+              className="text-blue-500 hover:underline"
+            >
+              Back to Dashboard
+            </span>
+          </Link>
         </p>
       </div>
 

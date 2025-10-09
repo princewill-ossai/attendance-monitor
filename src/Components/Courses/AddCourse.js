@@ -63,7 +63,7 @@ const AddCourse = () => {
   };
 
   return (
-    <div className="bg-gray-100 dark:bg-[#020217] flex items-center font-bold justify-center h-screen">
+    <div className="bg-gray-100 dark:bg-[#020217] flex items-center font-bold justify-center min-h-screen">
       <div className="bg-white relative dark:bg-[#020221] text-gray-200 shadow-lg rounded-lg p-8 w-full max-w-md">
         <button
           onClick={() => navigate("/dashboard")}
@@ -98,7 +98,7 @@ const AddCourse = () => {
             className="w-full dark:bg-transparent border dark:border-gray-900 rounded px-3 py-2 mb-4"
             required
           >
-            <option value="" disabled selected>
+            <option value="" disabled>
               --select handler--
             </option>
             {lecturers.map((lecturer) => (

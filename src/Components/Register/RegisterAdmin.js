@@ -60,7 +60,7 @@ const RegisterAdmin = () => {
     }
 
     return (
-        <div className="overflow-y bg-gray-100 dark:bg-[#020217] flex items-center font-bold justify-center h-screen">
+        <div className="overflow-y bg-gray-100 dark:bg-[#020217] flex items-center font-bold justify-center min-h-screen">
             <div className="bg-white relative dark:bg-[#020221] text-gray-200 shadow-lg rounded-lg p-8 w-full max-w-md">
                 <button className="bg-gray-800 absolute right-5 px-4 py-2 rounded-lg">
                     &lArr; Dashboard
@@ -99,7 +99,7 @@ const RegisterAdmin = () => {
                         className="w-full border dark:bg-transparent dark:border-gray-900 rounded px-3 py-2 mb-4"
                         required
                     >
-                        <option className="text-black" value="" selected disabled>--select category--</option>
+                        <option className="text-black" value="" disabled>--select category--</option>
                         <option className="text-black font-bold" value="STAFF">STAFF</option>
                     </select>
 
