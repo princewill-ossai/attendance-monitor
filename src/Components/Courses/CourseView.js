@@ -113,3 +113,56 @@ const CourseView = () => {
 }
 
 export default CourseView
+
+// const location = useLocation()
+// const { course } = location.state || {}
+// const [studentCount, setStudentCount] = useState(0) THE INITIAL STATE OF STUDENT COUNT
+
+// const handleClick = () => {
+//   navigate(`/course/students`, { state: { course } }) THIS WILL get THE COURSE FROM THE URL
+// }
+
+//THIS ONE IS THE INITIAL STATE FOR THE LOADER, TABLE AND EMPTYFOLDER
+// const [render, setRender] = useState({
+//   loader: true,
+//   table: false,
+//   emptyFolder: false
+// });
+/* 
+
+const fetchStudentCount = useCallback(async () => {
+  const response = await get(`${coursesUrl}/${course.id}/count`, getJsonHeader()) THIS WILL FETCH ALL STUDENT THAT ARE REGISTERED FOR A SPECIFIC COURSE BASED ON THE COURSE ID GOTTEN FROM THE URL
+  if (response.code === '00')
+    setStudentCount(response.data) IF STUDENT COUNT IS FETCHED, THIS WILL UPDATE THE STATE OF STUDENT COUNT WITH THE FETCHED DATA. 
+  else
+    alert('Unable to fetch categories. Kindly refresh')
+}, [course.id]);
+
+const fetchSessions = useCallback(async (page, size) => { THE useCallback is used to memoize the function, so it is obly re-created when the dependency changes
+
+before data is fetched only the loader will display
+  setRender({
+    loader: true,
+    table: false,
+    emptyFolder: false
+  })
+  const response = await get(`${sessionUrl}/${course.id}/list?page=${page}&size=${size}`, getJsonHeader())
+  if (response.code === '00' && response.data.content.length !== 0) { if this condition is true, show the table of fetched data and hide other components
+    setRender({
+      loader: false,
+      table: true,
+      emptyFolder: false
+    })
+
+    updates the state with the fetched data
+    setSessions(response.data.content)
+    setTotalPages(response.data.totalElements)
+  } else {
+    setRender({
+      loader: false,
+      table: false,
+      emptyFolder: true
+    });
+  }
+}, [course.id]);
+*/

@@ -123,3 +123,53 @@ const MarkAttendance = () => {
 }
 
 export default MarkAttendance
+
+/* 
+the custom code for posting formData
+const [confirmationDialog, setConfirmationDialog] = useState({
+  showDialog: false,
+  processing: false,
+  successful: false,
+  parent: false,
+  error: false,
+  request: null,
+  endpoint: `${attendanceUrl}`,
+  method: "POST_FORM_DATA",
+  landingPage: "/dashboard"
+});
+
+THIS FUNCTION CONVERTS THE IMAGE TAKEN IN BASE64 FORMAT TO FILE SO WE CAN SEND TO BACKEND USING FORMDATA
+const base64ToFile = (base64, filename) => {
+  const arr = base64.split(",");
+  const mime = arr[0].match(/:(.*?);/)[1];
+  const bstr = atob(arr[1]);
+  let n = bstr.length;
+  const u8arr = new Uint8Array(n);
+
+  while (n--) {
+    u8arr[n] = bstr.charCodeAt(n);
+  }
+
+  return new File([u8arr], filename, { type: mime });
+};
+
+THIS FUNCTION GETS A SCREENSHOT FROM THE WEBCAM
+const capture = () => {
+  const imageSrc = webcamRef.current.getScreenshot();
+
+  if (imageSrc) {
+    setImages((prev) => [...prev, imageSrc]);
+  }
+};
+
+This code loops through all images, converts each from base64 to a File, and appends both the session ID and the image file to a FormData object, preparing it for upload to the backend.
+
+const request = new FormData();
+
+images.forEach((img, index) => {
+  const file = base64ToFile(img, `student_${index + 1}.jpg`)
+
+  request.append("sessionId", session.id)
+  request.append("facialImages", file)
+})
+*/

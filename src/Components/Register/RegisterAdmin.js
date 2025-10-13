@@ -65,7 +65,7 @@ const RegisterAdmin = () => {
                 <button className="bg-gray-800 absolute right-5 px-4 py-2 rounded-lg">
                     &lArr; Dashboard
                 </button>
-                <h1 className="text-2xl pt-16 font-bold mb-6">Add New Admin</h1>
+                <h1 className="text-2xl pt-16 font-bold mb-6">Add New Lecturer</h1>
                 <form onSubmit={handleOnSubmit}>
                     <label className="block mb-2 font-medium">First Name</label>
                     <input

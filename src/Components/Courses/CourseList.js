@@ -17,3 +17,5 @@ const CourseList = ({ courses, shouldDisplay }) => {
 }
 
 export default CourseList
+
+// HERE WE RECEIVE THE PROPS AND LOOP THEOUGH THEM TO CREATE INDIVIDUAL COMPONENT FOR EACH COURSE

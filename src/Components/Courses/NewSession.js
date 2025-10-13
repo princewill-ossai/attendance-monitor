@@ -129,3 +129,32 @@ const NewSession = () => {
 };
 
 export default NewSession;
+
+/*
+WHEN A USER TYPES ON AN INPUT FIELD, THE ONCHANGE EVENT IS TRIGERED
+const handleChange = (event) => {
+  const { name, value, type } = event.target; THIS WILL TARGET THE SPECIFIC INPUT FIELD THAT FIRED THE EVENT, THEN WE GET THE INPUT "NAME ATTRIBUTE" AND "VALUE" AND " TYPE E.G TEXT"
+  if (type === 'select-one') {
+    setCourseData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  } else {
+    setCourseData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  }
+};
+
+WHEN THE SUBMIT BUTTON OF THE FORM IS CLICKED.
+const handleSubmit = async (event) => {
+  event.preventDefault(); THIS PREVENT THE DEFAULT BEHAVIOR OF RELOADING THE PAGE
+  setConfirmationDialog((prev) => ({
+    ...prev,
+    showDialog: true,
+    parent: true,
+    request: courseData,
+  }));
+};
+*/

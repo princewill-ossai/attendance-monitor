@@ -36,9 +36,9 @@ const Sidebar = () => {
         <nav className="flex flex-col gap-7 px-2 py-4 space-y-1">
           {[
             { to: '/dashboard', icon: 'fa-th-large', label: 'Dashboard' },
-            { to: '/registerStudent', icon: 'fa-graduation-cap', label: 'Add New Student' },
             { to: '/registerAdmin', icon: 'fa-user', label: 'Add Lecturer' },
             { to: '/addCourse', icon: 'fa-clipboard-list', label: 'Add Course' },
+            { to: '/registerStudent', icon: 'fa-graduation-cap', label: 'Add New Student' },
           ].map((item, index) => (
             <Link to={item.to}>
               <div

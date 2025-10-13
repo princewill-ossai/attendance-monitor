@@ -1,6 +1,6 @@
 import React, { useState, useCallback, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { get, getJsonHeader, handleError, post } from "../Utilities/HttpClientUtil";
+import { get, getJsonHeader } from "../Utilities/HttpClientUtil";
 import { getLecturersList, registerCourse } from "../Utilities/Endpoints";
 import { toSentenceCase } from "../Utilities/StringUtils";
 import ConfirmationModal from "../Modal/ConfirmationModal";
@@ -127,3 +127,52 @@ const AddCourse = () => {
 };
 
 export default AddCourse;
+
+// Code explanation
+
+//THESE ARE THE INITIAL STATE FOR LECTURERS AND COURSEDATA
+// const [lecturers, setLecturers] = useState([]);
+// const [courseData, setCourseData] = useState({
+//   name: "",
+//   code: "",
+//   handlerId: null,
+// });
+
+// THIS IS THE FUNCTION TO FETCH LECTURERS.
+// const fetchLecturers = useCallback(async () => {
+//   const response = await get(`${getLecturersList}`, getJsonHeader());
+
+//IF THE CONDITION IS TRUE AND LECTURERS ARE FETCHED, THIS WILL UPDATE THE LECTURER STATE DECLARED ABOVE WITH THE FETCHED DATA
+//   if (response.code === "00" && response.data.length !== 0)
+//     setLecturers(response.data);
+//   else alert("Unable to fetch lecturers. Kindly refresh.");
+// }, []);
+
+// THIS IS TO CALL THE FETCHLECTURER FUNCTION, AFTER THE COMPONENT RENDERS
+// useEffect(() => {
+//   fetchLecturers();
+// }, [fetchLecturers]);
+
+//THIS IS THE CONFIMATIONDIALOG, THIS ONE HANDLES THE POSTING. SO WE JUST GIVE IT THE ENDPOINT AND METHOD.
+// const [confirmationDialog, setConfirmationDialog] = useState({
+//   showDialog: false,
+//   processing: false,
+//   successful: false,
+//   parent: false,
+//   error: false,
+//   request: null,
+//   endpoint: `${registerCourse}`, THE EDPOINT IT WILL POST TO
+//   method: "POST", AND THE POST METHOD
+//   landingPage: "/dashboard", THEN IT REDIRECTS HERE
+// });
+
+//THIS FUNCTION HANDLES FORM SUBMISSION
+// const handleSubmit = async (event) => {
+//   event.preventDefault(); THIS PREVENTS THE DAFUALT BEHAVIOUR OF THE FORM WHEN SUBMITTED, SO IT WON'T RELOAD THE WHOLE PAGE
+//   setConfirmationDialog((prev) => ({  THIS UPDATES THE STATE OF THE CONFIRMATIONDIALOG
+//     ...prev,
+//     showDialog: true, this will show the "are  you sure message"
+//     parent: true,
+//     request: courseData, this is the request we are posting, now we set it to the courseData state
+//   }));
+// };

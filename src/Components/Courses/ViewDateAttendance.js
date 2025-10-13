@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react'
-import { useLocation, useNavigate } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
 import { get, getJsonHeader } from '../Utilities/HttpClientUtil'
-import { attendanceUrl, coursesUrl, sessionUrl } from '../Utilities/Endpoints'
+import { attendanceUrl } from '../Utilities/Endpoints'
 import Loader from '../Loader/Loader'
 import EmptyFolder from '../EmptyFolder/Index'
 import PaginationUtil from '../Pagination/Index'
@@ -10,10 +10,8 @@ import SessionAttendanceList from './SessionAttendanceList'
 const ViewDateAttendance = () => {
     const location = useLocation()
     const { session } = location.state || {}
-    const [studentCount, setStudentCount] = useState(0)
     const [students, setStudents] = useState(0)
-    const navigate = useNavigate();
-    
+
     const [render, setRender] = useState({
         loader: true,
         table: false,
@@ -21,15 +19,6 @@ const ViewDateAttendance = () => {
     });
     const [pageRequest, setPageRequest] = useState({ page: 1, size: 10 });
     const [totalPages, setTotalPages] = useState(0);
-
-    // const fetchStudentCount = useCallback(async () => {
-    //     const response = await get(`${coursesUrl}/${course.id}/count`, getJsonHeader())
-    //     if (response.code === '00')
-    //         setStudentCount(response.data)
-    //     else
-    //         alert('Unable to fetch categories. Kindly refresh')
-    // }, [course.id]);
-
     const fetchStudentAttendance = useCallback(async (page, size) => {
         setRender({
             loader: true,
@@ -57,7 +46,6 @@ const ViewDateAttendance = () => {
     }, []);
 
     useEffect(() => {
-        // fetchStudentCount();
         fetchStudentAttendance(pageRequest.page, pageRequest.size);
     }, [pageRequest.page, pageRequest.size, fetchStudentAttendance])
 
@@ -72,25 +60,7 @@ const ViewDateAttendance = () => {
                 </div>
             </header>
             <main className="flex-1 flex flex-col px-4 sm:px-6 py-6">
-                {/* <div className="py-3 px-4 sm:px-6 rounded-xl w-full max-w-[22rem] mx-auto sm:mx-0">
-                    <p className="text-gray-300 text-xl sm:text-2xl font-bold break-words">
-                        {course?.name || "Unknown Course"}
-                    </p>
-                    <p className="text-gray-400 text-xs sm:text-sm pt-2">{course?.code || "N/A"}</p>
-                </div> */}
                 <div className="flex flex-col sm:flex-row flex-wrap justify-center sm:justify-start gap-4 mt-3 mb-10">
-                    {/* <div
-                        onClick={handleClick}
-                        className="bg-[#0707418c] cursor-pointer p-5 sm:p-6 w-[22rem] rounded-xl shadow-md sm:text-left"
-                    >
-                        <p className="text-gray-300 text-2xl sm:text-xl font-bold">{studentCount}</p>
-                        <p className="text-gray-400 text-xs sm:text-sm pt-3">Students Registered</p>
-                    </div> */}
-
-                    {/* <div className="bg-[#0707418c] p-5 sm:p-6 w-[22rem] rounded-xl shadow-md sm:text-left">
-                        <p className="text-gray-300 text-2xl sm:text-xl font-bold">70</p>
-                        <p className="text-gray-400 text-xs sm:text-sm pt-3">Students Present</p>
-                    </div> */}
                 </div>
                 <div className="py-1 px-4 sm:px-6 rounded-xl w-full max-w-[30rem] mx-auto sm:mx-0 mb-6">
                     <p className="text-gray-300 text-xl sm:text-2xl font-bold">
@@ -119,3 +89,49 @@ const ViewDateAttendance = () => {
 }
 
 export default ViewDateAttendance
+
+/* 
+
+    this is the initial state for course attendance
+    const [students, setStudents] = useState(0)
+    
+    this is the initial state of the component, so while data is fetching, the loader will be set to true amd others false
+    const [render, setRender] = useState({
+        loader: true,
+        table: false,
+        emptyFolder: false
+    });
+
+    const fetchStudentAttendance = useCallback(async (page, size) => {
+        setRender({
+            loader: true,
+            table: false,
+            emptyFolder: false
+        })
+
+        const response = await get(`${attendanceUrl}?sessionId=${session.id}&page=${page}&size=${size}`, getJsonHeader())
+
+        if the data is fetched successfully, set loader and empty folder to false and display the table
+        if (response.code === '00' && response.data.content.length !== 0) {
+            setRender({
+                loader: false,
+                table: true,
+                emptyFolder: false
+            })
+            setStudents(response.data.content) this will update the student state with fetched data
+            setTotalPages(response.data.totalElements)
+        } else {
+            if data is not fetched or empty:
+            setRender({
+                loader: false,
+                table: false,
+                emptyFolder: true  SHOW THE EMPTY FOLDER
+            });
+        }
+    }, []);
+
+    USEEFFECT WILL CALL THE FNCTION WHEN COMPONENT RENDERS, AND WE PASSED THE PAGE SIZE AS THE DEPENDENCY SO IF IT CHANGES, THE FUNCTION WILL RUN AGAIN
+    useEffect(() => {
+        fetchStudentAttendance(pageRequest.page, pageRequest.size);
+    }, [pageRequest.page, pageRequest.size, fetchStudentAttendance])
+*/

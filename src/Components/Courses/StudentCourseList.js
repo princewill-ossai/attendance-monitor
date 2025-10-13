@@ -45,3 +45,5 @@ const StudentCourseList = ({ students, shouldDisplay }) => {
 }
 
 export default StudentCourseList
+
+// this is the student course attendance table component. here we just pass student as props and then display them in the table. so recreate this component for individual student by looping with the map method.
