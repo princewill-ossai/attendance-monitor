@@ -49,7 +49,7 @@ const AddCourse = () => {
     request: null,
     endpoint: `${registerCourse}`,
     method: "POST",
-    landingPage: "/dashboard",
+    landingPage: "/",
   });
 
   const handleSubmit = async (event) => {
@@ -66,7 +66,7 @@ const AddCourse = () => {
     <div className="bg-gray-100 dark:bg-[#020217] flex items-center font-bold justify-center min-h-screen">
       <div className="bg-white relative dark:bg-[#020221] text-gray-200 shadow-lg rounded-lg p-8 w-full max-w-md">
         <button
-          onClick={() => navigate("/dashboard")}
+          onClick={() => navigate("/")}
           className="bg-gray-800 absolute right-5 px-4 py-2 rounded-lg"
         >
           &larr; Dashboard
@@ -163,7 +163,7 @@ export default AddCourse;
 //   request: null,
 //   endpoint: `${registerCourse}`, THE EDPOINT IT WILL POST TO
 //   method: "POST", AND THE POST METHOD
-//   landingPage: "/dashboard", THEN IT REDIRECTS HERE
+//   landingPage: "/d", THEN IT REDIRECTS HERE
 // });
 
 //THIS FUNCTION HANDLES FORM SUBMISSION

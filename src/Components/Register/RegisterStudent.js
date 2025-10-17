@@ -18,14 +18,7 @@ const Register = () => {
     email: "",
     facialImage: null,
   });
-  // const fetchCategories = useCallback(async () => {
-  //   const response = await get(`${getCategories}`, getJsonHeader())
 
-  //   if (response.code === '00' && response.data.length !== 0)
-  //     setCategories(response.data)
-  //   else
-  //     alert('Unable to fetch categories. Kindly refresh')
-  // }, [])
   const fetchCourses = useCallback(async () => {
     const response = await get(`${getCourseList}`, getJsonHeader())
 
@@ -37,7 +30,6 @@ const Register = () => {
 
   useEffect(() => {
     fetchCourses();
-    // fetchCategories();
   }, [fetchCourses]);
   const [confirmationDialog, setConfirmationDialog] = useState({
     showDialog: false,
@@ -48,7 +40,7 @@ const Register = () => {
     request: null,
     endpoint: `${registerStudentUrl}`,
     method: "POST_FORM_DATA",
-    landingPage: "/dashboard"
+    landingPage: "/"
   });
 
   const handleChange = (event) => {
@@ -187,7 +179,7 @@ const Register = () => {
           </button>
         </form>
         <p className="text-center text-sm mt-4">
-          <Link to="/dashboard">
+          <Link to="/">
             <span
               className="text-blue-500 hover:underline"
             >

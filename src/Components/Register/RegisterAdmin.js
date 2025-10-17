@@ -21,7 +21,7 @@ const RegisterAdmin = () => {
         request: null,
         endpoint: `${registerLecturerUrl}`,
         method: "POST_FORM_DATA",
-        landingPage: "/dashboard"
+        landingPage: "/"
     });
     const handleChange = (event) => {
         const { name, value, files, multiple, options } = event.target;
@@ -135,7 +135,7 @@ const RegisterAdmin = () => {
                     </button>
                 </form>
                 <p className="text-center text-sm mt-4">
-                    <Link to="/dashboard">
+                    <Link to="/">
                         <span
                             href="../attebdance-record/attendanceResord.html"
                             className="text-blue-500 hover:underline"

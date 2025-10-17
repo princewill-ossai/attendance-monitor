@@ -75,3 +75,39 @@ const Dashboard = () => {
 }
 
 export default Dashboard
+
+/*
+const fetchCourses = useCallback(async (page, size) => { USING CALLBACK TO MEMOISE THE FUNCTION SO IT ONLY RE-CREATES WHEN THE DEPENDENCY CHANGES
+
+INITIAL STATE OF THE COMPONENT ONMOUNT
+  setRender({
+    loader: true,
+    table: false,
+    emptyFolder: false
+  })
+  const response = await get(`${coursesUrl}?page=${page}&size=${size}`, getJsonHeader()) WE USE QUERY PARAMETERS TO PASS EXTRA DATA LIKE THE PAGE AND SIZE, SO WE CAM FILTER THE DATA WE WANT.
+
+  if (response.code === '00' && response.data.content.length !== 0) {
+    setRender({
+      loader: false,
+      table: true,
+      emptyFolder: false
+    })
+    UPDATES THE COURSE STATE WITH FETCHED DATA
+    setCourses(response.data.content)
+    setTotalPages(response.data.totalElements)
+
+  } else {
+    setRender({
+      loader: false,
+      table: false,
+      emptyFolder: true
+    });
+  }
+}, [])
+
+CALLING THE FUNCTION IN USEEFFECT ENSURES IT ONLY RUNS WHEN THE DEPENDENCY CHANGES
+useEffect(() => {
+  fetchCourses(pageRequest.page, pageRequest.size)
+}, [pageRequest.page, pageRequest.size, fetchCourses])
+ */

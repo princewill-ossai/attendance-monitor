@@ -44,3 +44,7 @@ const SessionList = ({ sessions, shouldDisplay }) => {
 }
 
 export default SessionList
+
+/*
+the handleOnClick function here handles navigation based on the session status 
+*/

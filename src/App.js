@@ -30,11 +30,10 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/adminLogin" element={<AdminLogin />} />
 
         {/* All pages with sidebar */}
         <Route element={<DashboardLayout />}>
-          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/" element={<Dashboard />} />
           <Route path="/registerAdmin" element={<RegisterAdmin />} />
           <Route path="/registerStudent" element={<RegisterStudent />} />
           <Route path="/addCourse" element={<AddCourse />} />

@@ -23,13 +23,6 @@ const SessionAttendanceList = ({ students, shouldDisplay }) => {
                             </tr>
                         </thead>
                         <tbody className="divide-y divide-[#020221]">
-
-                            {/* <tr className="text-gray-300 text-sm cursor-pointer">
-                                <td className="px-4 sm:px-6 py-3">Testname</td>
-                                <td className="px-4 sm:px-6 py-3">Lastname</td>
-                                <td className="px-4 sm:px-6 py-3">Attendance</td>
-                                <td className="px-4 sm:px-6 py-3">Image</td>
-                            </tr> */}
                             {
                                 students.map(student => (
                                     <tr className="text-gray-300 text-sm cursor-pointer">

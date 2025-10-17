@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { coursesUrl } from "../Utilities/Endpoints";
 import { get, getJsonHeader } from "../Utilities/HttpClientUtil";
 import { useLocation } from "react-router-dom";
@@ -98,3 +98,38 @@ const ViewCourseStudents = () => {
 };
 
 export default ViewCourseStudents;
+
+/*
+FUNCTION TO FETCH STUDENT
+const fetchStudents = useCallback(async (page, size) => {
+  THE INITIAL STATE OF THE COMPONENT BEFORE DATA IS FETCHED
+  setRender({
+    loader: true,
+    table: false,
+    emptyFolder: false
+  })
+  const response = await get(`${coursesUrl}/${course.id}/students?page=${page}&size=${size}`, getJsonHeader())
+  if (response.code === '00' && response.data.content.length !== 0) {
+  IF DATA IS FETCHED SUCCESSFULLY, DISPLAY THE TABLE OF DATA AND HIDE OTHER COMPONENTS
+    setRender({
+      loader: false,
+      table: true,
+      emptyFolder: false
+    })
+      UPDATE THE STUDENT STATE WITH THE DATA FETCHED
+    setStudents(response.data.content)
+    setTotalPages(response.data.totalElements)
+  } else {
+    setRender({
+      loader: false,
+      table: false,
+      emptyFolder: true
+    });
+  }
+}, [course.id])
+
+WE USE USEFFECT HERE TO CALL THE FUNCTION ONCE AFTER THE COMPONENT RENDERS
+useEffect(() => {
+  fetchStudents(pageRequest.page, pageRequest.size)
+}, [pageRequest.page, pageRequest.size, fetchStudents])
+*/

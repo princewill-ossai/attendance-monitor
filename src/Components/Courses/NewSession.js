@@ -56,7 +56,7 @@ const NewSession = () => {
     request: null,
     endpoint: `${sessionUrl}`,
     method: "POST",
-    landingPage: "/dashboard",
+    landingPage: "/",
   });
   const handleSubmit = async (event) => {
     event.preventDefault();

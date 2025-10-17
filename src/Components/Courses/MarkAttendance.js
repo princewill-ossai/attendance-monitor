@@ -18,7 +18,7 @@ const MarkAttendance = () => {
     request: null,
     endpoint: `${attendanceUrl}`,
     method: "POST_FORM_DATA",
-    landingPage: "/dashboard"
+    landingPage: "/"
   });
 
   const location = useLocation();
@@ -135,7 +135,7 @@ const [confirmationDialog, setConfirmationDialog] = useState({
   request: null,
   endpoint: `${attendanceUrl}`,
   method: "POST_FORM_DATA",
-  landingPage: "/dashboard"
+  landingPage: "/"
 });
 
 THIS FUNCTION CONVERTS THE IMAGE TAKEN IN BASE64 FORMAT TO FILE SO WE CAN SEND TO BACKEND USING FORMDATA

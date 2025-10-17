@@ -3,9 +3,9 @@ import clsx from "clsx";
 import loader from "../../Assets/Loader.gif";
 import success_tick from "../../Assets/good_tick_1.png";
 import bad_tick from "../../Assets/bad_tick.png";
-import { useContext, useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import { get, getFormDataHeader, getJsonHeader, post } from "../Utilities/HttpClientUtil";
+import { getFormDataHeader, getJsonHeader, post } from "../Utilities/HttpClientUtil";
 /*
     This modal should be reusable
 */

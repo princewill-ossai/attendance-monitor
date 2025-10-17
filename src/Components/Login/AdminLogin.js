@@ -44,7 +44,7 @@ const AdminLogin = () => {
     });
 
     setTimeout(() => {
-      navigate("/dashboard"); // 👈 Redirect to dashboard after login
+      navigate("/"); // 👈 Redirect to dashboard after login
     }, 1000);
   };
 
