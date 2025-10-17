@@ -64,7 +64,7 @@ const Sidebar = () => {
         </div>
         <div className="mt-auto px-4 border-t border-[rgba(255,255,255,0.03)] sticky bottom-0 bg-[#020217]">
           <Link
-            to="/adminLogin"
+            to=""
             onClick={handleLinkClick}
             className="flex items-center gap-3 px-3 py-2 rounded-md hover:bg-[rgba(255,255,255,0.03)]"
           >
