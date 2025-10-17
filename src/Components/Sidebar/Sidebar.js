@@ -93,3 +93,12 @@ const Sidebar = () => {
 }
 
 export default Sidebar
+
+/* Sidebar component with responsive design and navigation links 
+
+
+const [isOpen, setIsOpen] = useState(false)
+const handleLinkClick = () => {
+  if (window.innerWidth < 1024) setIsOpen(false)
+}
+ */

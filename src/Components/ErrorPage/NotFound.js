@@ -10,3 +10,5 @@ const NotFound = () => {
 }
 
 export default NotFound
+
+// Fallbck route for non-existing pages

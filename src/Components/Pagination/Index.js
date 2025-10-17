@@ -104,3 +104,76 @@ const PaginationUtil = ({ pageRequest, setPageRequestFxn, fetchItemsFxn, totalPa
 }
 
 export default PaginationUtil;
+
+/*
+const PaginationUtil = ({ pageRequest, setPageRequestFxn, fetchItemsFxn, totalPages, render }) => { THIE FUNCTIONAL COMPONENT TAKES IN PAGE REQUEST, SETTER FUNCTION, FETCH FUNCTION, TOTAL PAGES AND RENDER FUNCTION AS PROPS
+
+THIS FUNCTION IS TRIGGERED WHEN A USER CLICKS ON A PAGE NUMBER
+    const handlePageClick = (event) => {
+        SET RENDER TO LOADER
+        render({
+            loader: true,
+            table: false,
+            emptyFolder: false
+        });
+        SELECTED PAGE IS event.selected + 1 BECAUSE event.selected IS ZERO-BASED
+        const selectedPage = event.selected + 1;
+
+        UPDATE THE PAGE REQUEST STATE WITH THE SELECTED PAGE
+        setPageRequestFxn((prev) => ({
+            ...prev,
+            page: selectedPage
+        }))
+        CALL THE FETCH FUNCTION TO FETCH ITEMS FOR THE SELECTED PAGE
+        fetchItemsFxn(selectedPage, pageRequest.size);
+    };
+
+    THIS FUNCTION IS TRIGERED WHEN USER MANUALLY TYPES A PAGE NUMBER IN THE INPUT FIELD
+    const handlePageChange = (event) => {
+        render({
+            loader: true,
+            table: false,
+            emptyFolder: false
+        });
+        IF VALUE IS EMPTY, SET TO 1 AS DEFAULT PAGE, ELSE TAKE THE TYPED VALUE
+        const pageValue = event.target.value.trim() === "" ? 1 : event.target.value
+        event.preventDefault();
+
+        UPDATE THE PAGE REQUEST STATE WITH THE TYPED PAGE VALUE
+        setPageRequestFxn((prev) => ({
+            ...prev,
+            page: pageValue
+        }));
+
+        CALL THE FETCH FUNCTION TO FETCH ITEMS FOR THE TYPED PAGE
+        fetchItemsFxn(pageValue, pageRequest.size);
+    }
+
+    THIS FUNCTION IS TRIGGERED WHEN A USER CHANGES THE SIZE SELECT DROPDOWN
+    const handleSizeChange = (event) => {
+        event.preventDefault();
+        setPageRequestFxn((prev) => ({
+            ...prev,
+            size: event.target.value
+        }));
+        fetchItemsFxn(pageRequest.page, event.target.value);
+    }
+
+    RETURN THE PAGINATION JSX
+    THIS GENERATES THE PAGINATION CONTROLS USING REACT PAGINATE COMPONENT (PREV, NEXT, PAGE NUMBERS, ETC)
+    <ReactPaginate
+                        previousLabel={'Prev'}
+                        nextLabel={'Next'}
+                        breakLabel={'...'}
+                        pageCount={totalPages}
+                        pageRangeDisplayed={3}
+                        marginPagesDisplayed={1}
+                        onPageChange={handlePageClick} HANDLE PAGE CLICK EVENT
+                        activeClassName={'bg-blue-500 text-white rounded'}
+                        containerClassName={'flex flex-wrap items-center gap-2 text-sm'}
+                        pageClassName={'px-3 py-1 border rounded hover:bg-gray-100'}
+                        previousClassName={'px-3 py-1 border rounded hover:bg-gray-100'}
+                        nextClassName={'px-3 py-1 border rounded hover:bg-gray-100'}
+    />
+
+*/

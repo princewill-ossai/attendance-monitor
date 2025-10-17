@@ -156,3 +156,72 @@ const RegisterAdmin = () => {
 
 export default RegisterAdmin;
 
+/*
+THE INITIAL STATE OF THE FORM
+const [userData, setUserData] = useState({
+    firstname: "",
+    lastname: "",
+    dept: "",
+    category: "STAFF",
+    email: "",
+    facialImage: null,
+});
+
+THE CONFIRMATION DIALOG STATE THAT DOES THE FORM SUBMISSION
+const [confirmationDialog, setConfirmationDialog] = useState({
+    showDialog: false,
+    processing: false,
+    successful: false,
+    parent: false,
+    error: false,
+    request: null,
+    endpoint: `${registerLecturerUrl}`, ENDPOINT URL TO POST TO
+    method: "POST_FORM_DATA", METHOD TO USE
+    landingPage: "/" WHERE TO REDIRECT AFTER SUCCESSFUL SUBMISSION
+});
+
+THE HANDLECHANGE FUNCTION TO HANDLE FORM INPUT CHANGES
+const handleChange = (event) => {
+    const { name, value, files, multiple, options } = event.target; TARGET THE INPUT FIELD THAT FIRED THE EVENT, THEN GET THE NAME, VALUE, FILES, MULTIPLE AND OPTIONS IF IT IS A SELECT FIELD
+
+    if (multiple) { IF THE INPUT FIELD ALLOWS MULTIPLE SELECTIONS
+        const selectedValues = Array.from(options) CONVERT THE OPTIONS TO AN ARRAY
+            .filter(opt => opt.selected)   FILTER THE SELECTED OPTIONS
+            .map(opt => parseInt(opt.value));   MAP THE SELECTED OPTIONS TO THEIR INTEGER VALUES
+
+            THEN UPDATE THE PREVIOUS USERDATA STATE WITH THE SELECTED VALUES
+        setUserData((prev) => ({ 
+            ...prev,
+            [name]: selectedValues,
+        }));
+
+    } else { IF IT IS A SINGLE INPUT FIELD
+        setUserData((prev) => ({ 
+            ...prev,
+            [name]: files ? files[0] : value, IF IT HAS FILES, TAKE THE FIRST FILE, ELSE TAKE THE VALUE
+        }));
+    }
+};
+
+THE HANDLEONSUBMIT FUNCTION TO HANDLE FORM SUBMISSION
+const handleOnSubmit = (event) => {
+    event.preventDefault(); PREVENT THE DEFAULT BEHAVIOUR OF THE FORM WHEN SUBMITTED, SO IT WON'T RELOAD THE WHOLE PAGE
+
+    const request = new FormData(); CREATE A NEW FORM DATA OBJECT
+    request.append("firstname", userData.firstname.trim()); APPEND FIRSTNAME TO THE FORMDATA
+    request.append("lastname", userData.lastname.trim());
+    request.append("dept", userData.dept.trim());
+    request.append("email", userData.email.trim());
+    request.append("category", userData.category);
+    request.append("facialImage", userData.facialImage);
+
+    Set THE CONFIRMATIONDIALOG STATE TO SHOW THE DIALOG AND SET THE REQUEST TO THE FORMDATA CREATED ABOVE
+    setConfirmationDialog(prev => ({
+        ...prev, THIS MEANS THAT WE ARE KEEPING THE PREVIOUS STATE VALUES AND ASSIGNING NEW VALUES TO SOME OF THEM
+        showDialog: true,
+        parent: true,
+        request: request
+    }));
+}
+*/
+

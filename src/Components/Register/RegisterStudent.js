@@ -198,3 +198,92 @@ const Register = () => {
 };
 
 export default Register;
+
+/* 
+const [courses, setCourses] = useState([{}]) INITIALIZE COURSES STATE
+  const [userData, setUserData] = useState({ INITIALIZE FORM STATE
+    regNo: "",
+    firstname: "",
+    lastname: "",
+    dept: "",
+    category: "STUDENT",
+    courses: [],
+    email: "",
+    facialImage: null,
+  });
+
+  FUNCTION TO FETCH COURSES FROM THE BACKEND
+  const fetchCourses = useCallback(async () => { USECALLBACK TO MEMOISE THE FUNCTION AND AVOID RE-RENDERING
+
+    const response = await get(`${getCourseList}`, getJsonHeader()) FETCH COURSES USING GET REQUEST
+
+    if (response.code === '00' && response.data.length !== 0) // IF RESPONSE IS SUCCESSFUL
+      setCourses(response.data) UPDATES THE COURSES STATE WITH THE FETCHED DATA
+    else
+      alert('Unable to fetch courses. Kindly refresh') ALERT IF FETCHING FAILS
+  }, [])
+
+  WE CALL FETCHCOURSES IN USEEFFECT WHEN THE COMPONENT MOUNTS
+  useEffect(() => {
+    fetchCourses();
+  }, [fetchCourses]);
+
+  INITIALIZE CONFIRMATION DIALOG STATE FOR FORM SUBMISSION
+  const [confirmationDialog, setConfirmationDialog] = useState({
+    showDialog: false,
+    processing: false,
+    successful: false,
+    parent: false,
+    error: false,
+    request: null,
+    endpoint: `${registerStudentUrl}`, ENDPOINT TO POST TO
+    method: "POST_FORM_DATA", METHOD TO USE
+    landingPage: "/" WHERE TO REDIRECT AFTER SUCCESSFUL SUBMISSION
+  });
+
+  THE HANDLECHANGE FUNCTION TO HANDLE FORM INPUT CHANGES
+  const handleChange = (event) => {
+    const { name, value, files, multiple, options } = event.target; TARGET THE INPUT FIELD THAT FIRED THE EVENT, THEN GET THE NAME, VALUE, FILES, MULTIPLE AND OPTIONS IF IT IS A SELECT FIELD
+
+    if (multiple) { IF THE INPUT FIELD ALLOWS MULTIPLE SELECTIONS
+      const selectedValues = Array.from(options) CONVERT THE OPTIONS TO AN ARRAY
+        .filter(opt => opt.selected)  FILTER THE SELECTED OPTIONS
+        .map(opt => parseInt(opt.value)); MAP THE SELECTED OPTIONS TO THEIR INTEGER VALUES
+
+      console.log("Courses value", selectedValues) LOG THE SELECTED COURSES
+      THEN UPDATE THE PREVIOUS USERDATA STATE WITH THE SELECTED VALUES
+      setUserData((prev) => ({
+        ...prev,
+        [name]: selectedValues,
+      }));
+    } else {
+      setUserData((prev) => ({
+        ...prev,
+        [name]: files ? files[0] : value, IF IT HAS FILES, TAKE THE FIRST FILE, ELSE TAKE THE VALUE
+      }));
+    }
+  };
+
+  HANDLE FORM SUBMISSION
+  const handleOnSubmit = (event) => {
+    event.preventDefault();
+
+    const request = new FormData(); CREATE A NEW FORMDATA OBJECT TO HOLD THE FORM DATA AND APPEND EACH FIELD TO IT
+    request.append("regNo", userData.regNo.trim().toUpperCase());
+    request.append("firstname", userData.firstname.trim());
+    request.append("lastname", userData.lastname.trim());
+    request.append("courses", userData.courses);
+    request.append("dept", userData.dept.trim());
+    request.append("email", userData.email.trim());
+    request.append("category", userData.category);
+    request.append("facialImage", userData.facialImage);
+
+    SET THE CONFIRMATION DIALOG STATE TO SHOW THE DIALOG AND PASS THE FORMDATA REQUEST
+    setConfirmationDialog(prev => ({
+      ...prev, PRESERVE PREVIOUS STATE
+      showDialog: true,
+      parent: true,
+      request: request
+    }));
+  }
+*/
